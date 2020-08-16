@@ -1,3 +1,7 @@
+#VS folders
+.vs
+out
+
 # C++ objects and libs
 *.slo
 *.lo
