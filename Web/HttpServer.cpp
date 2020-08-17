@@ -1,7 +1,7 @@
-#include "HTTPServer.h"
+#include "HttpServer.h"
 using namespace CPQ::Web;
 
-HTTPServer::HTTPServer(quint16 port, QObject* parent)
+HttpServer::HttpServer(quint16 port, QObject* parent)
   : QTcpServer(parent)
   , port(port)
   , mutex(new QMutex())
@@ -33,14 +33,14 @@ HTTPServer::HTTPServer(quint16 port, QObject* parent)
 }
 
 void
-HTTPServer::addRouteCallback(QString route,
+HttpServer::addRouteCallback(QString route,
                              std::function<void(QTcpSocket*, HTTPRequest)> func)
 {
   callbackMap.insert(route, func);
 }
 
 void
-HTTPServer::addRouteResponse(QString route,
+HttpServer::addRouteResponse(QString route,
                              std::function<HTTPResponse(HTTPRequest)> functor)
 {
   auto functor_ = [functor](QTcpSocket* socket, HTTPRequest request) -> void {
@@ -53,14 +53,14 @@ HTTPServer::addRouteResponse(QString route,
 }
 
 void
-HTTPServer::set404Callback(std::function<void(QTcpSocket*, HTTPRequest)> func)
+HttpServer::set404Callback(std::function<void(QTcpSocket*, HTTPRequest)> func)
 {
   QMutexLocker locker(mutex);
   handler404 = func;
 }
 
 void
-HTTPServer::set404Responce(std::function<HTTPResponse(HTTPRequest)> functor)
+HttpServer::set404Responce(std::function<HTTPResponse(HTTPRequest)> functor)
 {
   QMutexLocker locker(mutex);
   handler404 = [functor](QTcpSocket* socket, HTTPRequest request) -> void {
@@ -71,23 +71,23 @@ HTTPServer::set404Responce(std::function<HTTPResponse(HTTPRequest)> functor)
 }
 
 void
-HTTPServer::start()
+HttpServer::start()
 {
   assert(this->listen(QHostAddress::Any, port));
 
-  connect(this, &QTcpServer::newConnection, this, &HTTPServer::newConnection);
+  connect(this, &QTcpServer::newConnection, this, &HttpServer::newConnection);
 }
 
 void
-HTTPServer::newConnection()
+HttpServer::newConnection()
 {
   QTcpSocket* socket = this->nextPendingConnection();
 
-  connect(socket, &QTcpSocket::readyRead, this, &HTTPServer::firstReadClient);
+  connect(socket, &QTcpSocket::readyRead, this, &HttpServer::firstReadClient);
 }
 
 void
-HTTPServer::firstReadClient()
+HttpServer::firstReadClient()
 {
   QTcpSocket* socket = (QTcpSocket*)sender();
   QByteArray buf;
@@ -112,7 +112,7 @@ HTTPServer::firstReadClient()
     handler404(socket, request);
   }
   disconnect(
-    socket, &QTcpSocket::readyRead, this, &HTTPServer::firstReadClient);
+    socket, &QTcpSocket::readyRead, this, &HttpServer::firstReadClient);
 }
 
 HTTPRequest::HTTPRequest(QByteArray request)

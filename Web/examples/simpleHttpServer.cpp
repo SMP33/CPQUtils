@@ -1,6 +1,7 @@
 #include "../Web.h"
 #include <QCoreApplication>
 #include <QDebug>
+#include <QTimer>
 
 using namespace CPQ::Web;
 
@@ -10,7 +11,7 @@ main(int argc, char* argv[])
   qDebug() << "Start simpleHttpServer example";
   QCoreApplication a(argc, argv);
 
-  HTTPServer server(8080);
+  HttpServer server(8080);
 
   server.addRouteResponse("/", [](HTTPRequest request) -> HTTPResponse {
     return HTTPResponse("Hello dear " + request.headers["User-Agent"]);
@@ -20,7 +21,28 @@ main(int argc, char* argv[])
     return HTTPResponse("What is " + request.route + "?");
   });
 
-  server.start();
+  server.addRouteCallback(
+    "/count", [](QTcpSocket* socket, HTTPRequest) -> void {
+      HttpReplaceClientHandler* handler = new HttpReplaceClientHandler();
+      new HandlerController(handler, socket);
 
+      QTimer* timer = new QTimer();
+      QObject::connect(timer, &QTimer::timeout, [&]() {
+        QByteArray data = "Check";
+        qDebug() << data;
+        handler->updateData("asd");
+      });
+
+      QObject::connect(handler, &AbstractClientHandler::disconnected, [&]() {
+        qDebug() << "DISCONNECTED!";
+        timer->stop();
+        timer->deleteLater();
+      });
+
+      handler->start();
+      timer->start(1e3);
+    });
+
+  server.start();
   return a.exec();
 }
