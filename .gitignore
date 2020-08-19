@@ -2,7 +2,7 @@
 /doc
 
 # Git submodules
-/3rdparty
+#/3rdparty
 
 # VS folders and files
 .vs
