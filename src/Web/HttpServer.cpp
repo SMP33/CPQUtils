@@ -1,14 +1,15 @@
 #include "HttpServer.h"
-using namespace CPQ::Web;
 
-HttpServer::HttpServer(quint16 port, QObject* parent)
+using namespace cpq::web;
+
+HttpServer::HttpServer(QObject* parent)
   : QTcpServer(parent)
-  , port(port)
   , mutex(new QMutex())
 {
+  connect(this, &QTcpServer::newConnection, this, &HttpServer::newConnection);
   setMaxPendingConnections(10);
 
-  set404Responce([](HTTPRequest request) -> HTTPResponse {
+  set404Responce([](HttpRequest request) -> HttpResponse {
     QByteArray arr = "<html>\r\n"
                      "<head>"
                      "<title>404</title>"
@@ -28,22 +29,22 @@ HttpServer::HttpServer(quint16 port, QObject* parent)
                      "</body>"
                      "</html>";
 
-    return HTTPResponse(arr);
+    return HttpResponse(arr);
   });
 }
 
 void
 HttpServer::addRouteCallback(QString route,
-                             std::function<void(QTcpSocket*, HTTPRequest)> func)
+                             std::function<void(QTcpSocket*, HttpRequest)> func)
 {
   callbackMap.insert(route, func);
 }
 
 void
 HttpServer::addRouteResponse(QString route,
-                             std::function<HTTPResponse(HTTPRequest)> functor)
+                             std::function<HttpResponse(HttpRequest)> functor)
 {
-  auto functor_ = [functor](QTcpSocket* socket, HTTPRequest request) -> void {
+  auto functor_ = [functor](QTcpSocket* socket, HttpRequest request) -> void {
     socket->write(functor(request).toQByteArray());
     socket->flush();
     socket->close();
@@ -53,29 +54,21 @@ HttpServer::addRouteResponse(QString route,
 }
 
 void
-HttpServer::set404Callback(std::function<void(QTcpSocket*, HTTPRequest)> func)
+HttpServer::set404Callback(std::function<void(QTcpSocket*, HttpRequest)> func)
 {
   QMutexLocker locker(mutex);
   handler404 = func;
 }
 
 void
-HttpServer::set404Responce(std::function<HTTPResponse(HTTPRequest)> functor)
+HttpServer::set404Responce(std::function<HttpResponse(HttpRequest)> functor)
 {
   QMutexLocker locker(mutex);
-  handler404 = [functor](QTcpSocket* socket, HTTPRequest request) -> void {
+  handler404 = [functor](QTcpSocket* socket, HttpRequest request) -> void {
     socket->write(functor(request).toQByteArray());
     socket->flush();
     socket->close();
   };
-}
-
-void
-HttpServer::start()
-{
-  assert(this->listen(QHostAddress::Any, port));
-
-  connect(this, &QTcpServer::newConnection, this, &HttpServer::newConnection);
 }
 
 void
@@ -96,7 +89,7 @@ HttpServer::firstReadClient()
     buf.append(socket->readAll());
   }
 
-  HTTPRequest request(buf);
+  HttpRequest request(buf);
   QString route = request.route;
   bool matched = false;
 
@@ -115,8 +108,20 @@ HttpServer::firstReadClient()
     socket, &QTcpSocket::readyRead, this, &HttpServer::firstReadClient);
 }
 
-HTTPRequest::HTTPRequest(QByteArray request)
+//
+//Реализация методов структур
+//
+
+HttpRequest::HttpRequest(QByteArray request)
 {
+  /// QByteArray преобразуется в строку и парсится как строка.
+  ///
+  /// Заголовки отделяются от тела двумя идущими
+  /// подряд символами  CRLF или LF.
+  ///
+  /// После нахождения разделителя данные
+  /// преобразуются обратно в QByteArray.
+
   QString str = QString(request);
   QRegularExpression re("(\r\n|\n){2,}");
   auto match = re.match(str);
@@ -154,7 +159,7 @@ HTTPRequest::HTTPRequest(QByteArray request)
   }
 }
 
-HTTPResponse::HTTPResponse(const QByteArray& body,
+HttpResponse::HttpResponse(const QByteArray& body,
                            qint16 statusCode,
                            const QString& reasonPhrase,
                            const QMap<QString, QString>& headers,
@@ -167,7 +172,7 @@ HTTPResponse::HTTPResponse(const QByteArray& body,
 
 {}
 
-HTTPResponse::HTTPResponse(const QString& body,
+HttpResponse::HttpResponse(const QString& body,
                            qint16 statusCode,
                            const QString& reasonPhrase,
                            const QMap<QString, QString>& headers,
@@ -180,7 +185,7 @@ HTTPResponse::HTTPResponse(const QString& body,
 {}
 
 QByteArray
-HTTPResponse::toQByteArray()
+HttpResponse::toQByteArray()
 {
   QByteArray response;
 

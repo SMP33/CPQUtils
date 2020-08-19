@@ -7,11 +7,16 @@
 #include <QObject>
 #include <QString>
 
+namespace cpq {
+
+namespace web {
+
 class HttpReplaceClientHandler : public AbstractClientHandler
 {
   Q_OBJECT
 public:
-  HttpReplaceClientHandler(QString contentType = "text/html",
+  HttpReplaceClientHandler(QByteArray contentType = "text/html",
+                           QByteArray boundary = "--boundary",
                            QObject* parent = nullptr);
 
   // AbstractClientHandler interface
@@ -22,9 +27,14 @@ public slots:
   void start();
 
 private:
-  QString title;
+  QByteArray contentType;
+  QByteArray boundary;
   bool isStarted;
-  QMutex mutex;
+  QMutex* mutex;
 };
+
+}
+
+}
 
 #endif // HttpReplaceClientHandler_H

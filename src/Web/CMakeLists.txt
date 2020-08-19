@@ -16,6 +16,5 @@ foreach(S ${SOURCE_CPP})
 endforeach()
 message("")
 
-add_library(Web STATIC ${SOURCE_CPP} "Web.h")
+add_library(Web STATIC ${SOURCE_CPP} "../Web.h")
 
-add_subdirectory("examples")

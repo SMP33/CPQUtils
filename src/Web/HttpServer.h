@@ -10,13 +10,14 @@
 #include <QTcpSocket>
 #include <QThread>
 
-namespace CPQ {
+namespace cpq {
 
-namespace Web {
+namespace web {
 
-struct HTTPRequest
+/// \brief Инкапсулирует HTTP запрос к серверу.
+struct HttpRequest
 {
-  HTTPRequest(QByteArray request);
+  HttpRequest(QByteArray request);
 
   QString method;
   QString route;
@@ -25,16 +26,17 @@ struct HTTPRequest
   QByteArray body;
 };
 
-struct HTTPResponse
+/// \brief  Инкапсулирует ответ от сервера.
+struct HttpResponse
 {
-  explicit HTTPResponse(
+  explicit HttpResponse(
     const QByteArray& body,
     qint16 statusCode = 200,
     const QString& reasonPhrase = "OK",
     const QMap<QString, QString>& headers = QMap<QString, QString>(),
     QString version = "HTTP/1.1");
 
-  explicit HTTPResponse(
+  explicit HttpResponse(
     const QString& body,
     qint16 statusCode = 200,
     const QString& reasonPhrase = "OK",
@@ -50,18 +52,21 @@ struct HTTPResponse
   QString version = "HTTP/1.1";
 };
 
+/// \brief HTTP сервер.
+/// \details Простой HTTP сервер, наследуется от QTcpServer.
+///  \todo Добавить доки.
 class HttpServer : public QTcpServer
 {
   Q_OBJECT
 public:
-  explicit HttpServer(quint16 port = 8080, QObject* parent = nullptr);
+  explicit HttpServer(QObject* parent = nullptr);
 
   void addRouteCallback(QString route,
-                        std::function<void(QTcpSocket*, HTTPRequest)> functor);
+                        std::function<void(QTcpSocket*, HttpRequest)> functor);
   void addRouteResponse(QString route,
-                        std::function<HTTPResponse(HTTPRequest)> functor);
-  void set404Callback(std::function<void(QTcpSocket*, HTTPRequest)> functor);
-  void set404Responce(std::function<HTTPResponse(HTTPRequest)> functor);
+                        std::function<HttpResponse(HttpRequest)> functor);
+  void set404Callback(std::function<void(QTcpSocket*, HttpRequest)> functor);
+  void set404Responce(std::function<HttpResponse(HttpRequest)> functor);
 
   template<typename Functor>
   void addRouteCallback(QString route, Functor functor);
@@ -73,16 +78,14 @@ public:
   void set404Responce(Functor functor);
 
 public slots:
-  void start();
   void newConnection();
   void firstReadClient();
 
 private:
-  quint16 port;
   QMutex* mutex;
 
-  QMap<QString, std::function<void(QTcpSocket*, HTTPRequest)>> callbackMap;
-  std::function<void(QTcpSocket*, HTTPRequest)> handler404;
+  QMap<QString, std::function<void(QTcpSocket*, HttpRequest)>> callbackMap;
+  std::function<void(QTcpSocket*, HttpRequest)> handler404;
 };
 
 template<typename Functor>
@@ -90,7 +93,7 @@ void
 HttpServer::addRouteCallback(QString route, Functor functor)
 {
   // QMutexLocker locker(mutex);
-  callbackMap.insert(route, [functor](QTcpSocket* socket, HTTPRequest request) {
+  callbackMap.insert(route, [functor](QTcpSocket* socket, HttpRequest request) {
     functor(socket, request);
   });
 }
@@ -99,7 +102,7 @@ template<typename Functor>
 void
 HttpServer::addRouteResponse(QString route, Functor functor)
 {
-  auto functor_ = [functor](QTcpSocket* socket, HTTPRequest request) -> void {
+  auto functor_ = [functor](QTcpSocket* socket, HttpRequest request) -> void {
     socket->write(functor(request).toQByteArray());
     socket->flush();
     socket->close();
@@ -113,7 +116,7 @@ void
 HttpServer::set404Callback(Functor functor)
 {
   QMutexLocker locker(mutex);
-  handler404 = [functor](QTcpSocket* socket, HTTPRequest request) {
+  handler404 = [functor](QTcpSocket* socket, HttpRequest request) {
     functor(socket, request);
   };
 }
@@ -123,7 +126,7 @@ void
 HttpServer::set404Responce(Functor functor)
 {
   QMutexLocker locker(mutex);
-  handler404 = [functor](QTcpSocket* socket, HTTPRequest request) -> void {
+  handler404 = [functor](QTcpSocket* socket, HttpRequest request) -> void {
     socket->write(functor(request).toQByteArray());
     socket->flush();
     socket->close();

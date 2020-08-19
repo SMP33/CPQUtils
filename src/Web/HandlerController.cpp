@@ -1,5 +1,7 @@
 #include "HandlerController.h"
 
+using namespace cpq::web;
+
 HandlerController::HandlerController(AbstractClientHandler* handler,
                                      QTcpSocket* socket,
                                      QObject* parent)

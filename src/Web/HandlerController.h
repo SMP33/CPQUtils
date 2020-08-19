@@ -5,6 +5,9 @@
 #include <QObject>
 #include <QTcpSocket>
 
+namespace cpq {
+namespace web {
+
 class HandlerController : public QObject
 {
   Q_OBJECT
@@ -26,5 +29,8 @@ private:
   AbstractClientHandler* handler;
   QTcpSocket* socket;
 };
+
+}
+}
 
 #endif // HANDLERCONTROLLER_H
