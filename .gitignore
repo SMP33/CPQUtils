@@ -4,9 +4,10 @@
 # Git submodules
 /3rdparty
 
-# VS folders
+# VS folders and files
 .vs
 out
+CMakeSettings.json
 
 # C++ objects and libs
 *.slo
