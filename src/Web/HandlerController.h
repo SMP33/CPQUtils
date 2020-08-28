@@ -1,7 +1,7 @@
 #ifndef HANDLERCONTROLLER_H
 #define HANDLERCONTROLLER_H
 
-#include "clienthandlers/AbstractClientHandler.h"
+#include "ClientHandlers/AbstractClientHandler.h"
 #include <QObject>
 #include <QTcpSocket>
 
