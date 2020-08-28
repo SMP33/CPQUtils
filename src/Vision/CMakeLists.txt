@@ -11,8 +11,8 @@ message("  Eigen3_FOUND: ${Eigen3_FOUND}")
 
 if(OpenCV_FOUND)#Build with CV
     if(NOT Eigen3_FOUND)
-        message(FATAL_ERROR "Eigen3 was not found!\r\n"
-            "You can install it from here: https://gitlab.com/libeigen/eigen")
+#        message(FATAL_ERROR "Eigen3 was not found!\r\n"
+#            "You can install it from here: https://gitlab.com/libeigen/eigen")
     endif()
 else()#Build without CV
     message(WARNING "OpenCV was not found!\r\n"
