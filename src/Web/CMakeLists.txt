@@ -1,5 +1,5 @@
 ﻿message("")
-message("Library Web:")
+message("========== Library Web ==========")
 
 find_package(Qt5 REQUIRED COMPONENTS Core Network)
 
@@ -17,4 +17,5 @@ endforeach()
 message("")
 
 add_library(Web STATIC ${SOURCE_CPP} "../Web.h")
+
 

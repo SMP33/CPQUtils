@@ -1,3 +1,5 @@
+message("========== Examples ==========")
+
 message("Examples dir: ${CMAKE_CURRENT_SOURCE_DIR}")
 
 SUBDIRLIST(examplesSubdirs ${CMAKE_CURRENT_SOURCE_DIR})
