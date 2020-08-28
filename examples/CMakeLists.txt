@@ -1,11 +1,11 @@
-find_package(Qt5 REQUIRED COMPONENTS Core Network)
+message("Examples dir: ${CMAKE_CURRENT_SOURCE_DIR}")
 
-include_directories(${Qt5Core_INCLUDE_DIRS})
-include_directories(${Qt5Network_INCLUDE_DIRS})
+SUBDIRLIST(examplesSubdirs ${CMAKE_CURRENT_SOURCE_DIR})
+message("Examples list:")
 
-add_executable(simpleHttpServer simpleHttpServer.cpp)
+foreach(dir ${examplesSubdirs})
+    message("  ${dir}")
+    add_subdirectory(${dir})
+endforeach()
 
-target_link_libraries(simpleHttpServer
-    Web
-    Qt5::Core
-    Qt5::Network)
+message("")

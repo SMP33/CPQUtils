@@ -54,6 +54,51 @@ HttpServer::addRouteResponse(QString route,
 }
 
 void
+HttpServer::addRouteResponse(QString route, HttpResponse response)
+{
+  addRouteResponse(route,
+                   [=](HttpRequest) -> HttpResponse { return response; });
+}
+
+void
+HttpServer::addRouteResponse(QString route,
+                             QByteArray response,
+                             qint16 statusCode,
+                             const QString& reasonPhrase,
+                             const QMap<QString, QString>& headers,
+                             QString version)
+{
+  addRouteResponse(
+    route, HttpResponse(response, statusCode, reasonPhrase, headers, version));
+}
+
+void
+HttpServer::addRouteResponse(QString route,
+                             QString response,
+                             qint16 statusCode,
+                             const QString& reasonPhrase,
+                             const QMap<QString, QString>& headers,
+                             QString version)
+{
+  addRouteResponse(
+    route, HttpResponse(response, statusCode, reasonPhrase, headers, version));
+}
+
+void
+HttpServer::addRouteResponse(QString route,
+                             const char* response,
+                             qint16 statusCode,
+                             const QString& reasonPhrase,
+                             const QMap<QString, QString>& headers,
+                             QString version)
+{
+  addRouteResponse(
+    route,
+    HttpResponse(
+      QByteArray(response), statusCode, reasonPhrase, headers, version));
+}
+
+void
 HttpServer::set404Callback(std::function<void(QTcpSocket*, HttpRequest)> func)
 {
   QMutexLocker locker(mutex);
@@ -183,6 +228,24 @@ HttpResponse::HttpResponse(const QString& body,
   , headers(headers)
   , version(version)
 {}
+
+HttpResponse
+HttpResponse::fromFile(QString path,
+                       qint16 statusCode,
+                       const QString& reasonPhrase,
+                       const QMap<QString, QString>& headers,
+                       QString version)
+{
+  QFile file(path);
+  if (file.open(QIODevice::ReadOnly)) {
+    QByteArray body = file.readAll();
+    file.close();
+    return HttpResponse(body, statusCode, reasonPhrase, headers, version);
+  } else {
+    return HttpResponse(
+      QByteArray(""), statusCode, reasonPhrase, headers, version);
+  }
+}
 
 QByteArray
 HttpResponse::toQByteArray()

@@ -1,6 +1,7 @@
 #ifndef HTTPSERVER_H
 #define HTTPSERVER_H
 
+#include <QFile>
 #include <QMutex>
 #include <QMutexLocker>
 #include <QObject>
@@ -43,6 +44,13 @@ struct HttpResponse
     const QMap<QString, QString>& headers = QMap<QString, QString>(),
     QString version = "HTTP/1.1");
 
+  static HttpResponse fromFile(
+    QString path,
+    qint16 statusCode = 200,
+    const QString& reasonPhrase = "OK",
+    const QMap<QString, QString>& headers = QMap<QString, QString>(),
+    QString version = "HTTP/1.1");
+
   QByteArray toQByteArray();
 
   QByteArray body;
@@ -65,6 +73,32 @@ public:
                         std::function<void(QTcpSocket*, HttpRequest)> functor);
   void addRouteResponse(QString route,
                         std::function<HttpResponse(HttpRequest)> functor);
+
+  void addRouteResponse(QString route, HttpResponse response);
+  void addRouteResponse(
+    QString route,
+    QByteArray response,
+    qint16 statusCode = 200,
+    const QString& reasonPhrase = "OK",
+    const QMap<QString, QString>& headers = QMap<QString, QString>(),
+    QString version = "HTTP/1.1");
+
+  void addRouteResponse(
+    QString route,
+    QString response,
+    qint16 statusCode = 200,
+    const QString& reasonPhrase = "OK",
+    const QMap<QString, QString>& headers = QMap<QString, QString>(),
+    QString version = "HTTP/1.1");
+
+  void addRouteResponse(
+    QString route,
+    const char* response,
+    qint16 statusCode = 200,
+    const QString& reasonPhrase = "OK",
+    const QMap<QString, QString>& headers = QMap<QString, QString>(),
+    QString version = "HTTP/1.1");
+
   void set404Callback(std::function<void(QTcpSocket*, HttpRequest)> functor);
   void set404Responce(std::function<HttpResponse(HttpRequest)> functor);
 

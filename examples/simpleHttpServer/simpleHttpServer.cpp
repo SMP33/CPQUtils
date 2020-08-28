@@ -1,7 +1,10 @@
-#include "../src/Web.h"
+#define INCBIN_PREFIX
+
 #include <QCoreApplication>
 #include <QDebug>
 #include <QTimer>
+
+#include "../../src/Web.h"
 
 using namespace cpq::web;
 
@@ -26,27 +29,9 @@ main(int argc, char* argv[])
 
   server.listen(QHostAddress::Any, 8080);
 
-  server.addRouteResponse("/", [](HttpRequest) -> HttpResponse {
-    QByteArray data = "<html>"
-                      "<head>\r\n"
-                      "    <style type=\"text/css\">\r\n"
-                      "        body {\r\n"
-                      "            display: table;\r\n"
-                      "            margin: auto;\r\n"
-                      "        }\r\n"
-                      "    </style>\r\n"
-                      "</head>\r\n"
-                      "\r\n"
-                      "<body>\r\n"
-                      "<h1>This is example page!</h1>"
-                      "<a href=\"hello\">HTTP header example</a>"
-                      "<br>"
-                      "<a href=\"count\">multipart/x-mixed-replace example</a>"
-                      "</body>\r\n"
-                      "</html>";
+  server.addRouteResponse("/", HttpResponse::fromFile(":/index.html"));
 
-    return HttpResponse(data);
-  });
+  server.addRouteResponse("/simplest", "Hello world!");
 
   server.addRouteResponse("/hello", [](HttpRequest request) -> HttpResponse {
     QByteArray data = "Hello dear " + request.headers["User-Agent"].toUtf8();
@@ -74,7 +59,6 @@ main(int argc, char* argv[])
       });
 
       QObject::connect(handler, &AbstractClientHandler::disconnected, [=]() {
-        qDebug() << "DISCONNECTED!";
         timer->stop();
         timer->deleteLater();
         delete count;

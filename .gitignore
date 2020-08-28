@@ -1,9 +1,6 @@
 # Doc folder
 /doc
 
-# Git submodules
-#/3rdparty
-
 # VS folders and files
 .vs
 out
