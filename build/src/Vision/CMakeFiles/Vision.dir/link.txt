@@ -1,2 +1,0 @@
-C:\Qt\Tools\mingw730_64\bin\ar.exe qc libVision.a  CMakeFiles/Vision.dir/Vision_autogen/mocs_compilation.cpp.obj CMakeFiles/Vision.dir/CpqVideoCapture/CpqVideoCapture.cpp.obj CMakeFiles/Vision.dir/CpqVideoCapture/CpqVideoCaptureWorker_private.cpp.obj CMakeFiles/Vision.dir/QCVTypes.cpp.obj
-C:\Qt\Tools\mingw730_64\bin\ranlib.exe libVision.a

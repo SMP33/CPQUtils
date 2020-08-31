@@ -1,1 +1,0 @@
--IC:/Users/mikha/source/repos/CPQUtils/build/src/Web -IC:/Users/mikha/source/repos/CPQUtils/src/Web -IC:/Users/mikha/source/repos/CPQUtils/build/src/Web/Web_autogen/include -IC:/Qt/5.12.2/mingw73_64/include -IC:/Qt/5.12.2/mingw73_64/include/QtCore -IC:/Qt/5.12.2/mingw73_64/./mkspecs/win32-g++ -IC:/Qt/5.12.2/mingw73_64/include/QtNetwork 
