@@ -1,6 +1,9 @@
 # Doc folder
 /doc
 
+# Build folder
+build
+
 # VS folders and files
 .vs
 out

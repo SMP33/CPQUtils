@@ -2,5 +2,5 @@ add_subdirectory("Web")
 add_subdirectory("Vision")
 
 message("========== Headers to install ==========")
-installHeaders()
+cpq_install_headers()
 message("")

@@ -1,16 +1,27 @@
 #ifndef CPQVIDEOCAPTUREWORKER_PRIVATE_H
 #define CPQVIDEOCAPTUREWORKER_PRIVATE_H
 
-#include <QtCore/QObject>
+#include <QMutex>
+#include <QMutexLocker>
+#include <QObject>
+#include <QThread>
 
-class CpqVideoCaptureWorker_private : public QObject
+#include <opencv2/opencv.hpp>
+
+#include "../QCVTypes.h"
+
+class CpqVideoCaptureWorker_private : public QThread
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    explicit CpqVideoCaptureWorker_private(QObject *parent = nullptr);
+  explicit CpqVideoCaptureWorker_private(int index, QObject* parent);
+  explicit CpqVideoCaptureWorker_private(QString file, QObject* parent);
 
-signals:
+protected:
+  void run();
 
+private:
+  cv::VideoCapture capture;
 };
 
 #endif // CPQVIDEOCAPTUREWORKER_PRIVATE_H

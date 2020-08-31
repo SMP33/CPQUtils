@@ -1,6 +1,30 @@
+#ifndef NO_OPENCV
+
 #include "CpqVideoCaptureWorker_private.h"
 
-CpqVideoCaptureWorker_private::CpqVideoCaptureWorker_private(QObject *parent) : QObject(parent)
-{
+using namespace cv;
 
+CpqVideoCaptureWorker_private::CpqVideoCaptureWorker_private(int index,
+                                                             QObject* parent)
+{
+  capture = VideoCapture(index);
 }
+
+CpqVideoCaptureWorker_private::CpqVideoCaptureWorker_private(QString file,
+                                                             QObject* parent)
+{}
+
+void
+CpqVideoCaptureWorker_private::run()
+{
+  Mat mat;
+
+  while (true) {
+    this->usleep(1e5);
+
+    capture >> mat;
+    imshow("Video", mat);
+  }
+}
+
+#endif
