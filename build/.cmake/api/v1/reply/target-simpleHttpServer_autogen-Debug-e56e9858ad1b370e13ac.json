@@ -1,0 +1,65 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"examples/simpleHttpServer/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "Web::@215f143b80c3b56692fa"
+		}
+	],
+	"id" : "simpleHttpServer_autogen::@ff62637f3dce2b325384",
+	"isGeneratorProvided" : true,
+	"name" : "simpleHttpServer_autogen",
+	"paths" : 
+	{
+		"build" : "examples/simpleHttpServer",
+		"source" : "examples/simpleHttpServer"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/examples/simpleHttpServer/CMakeFiles/simpleHttpServer_autogen",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/examples/simpleHttpServer/CMakeFiles/simpleHttpServer_autogen.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

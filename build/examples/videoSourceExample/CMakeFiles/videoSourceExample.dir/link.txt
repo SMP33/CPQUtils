@@ -1,0 +1,3 @@
+C:\Qt\Tools\CMake_64\bin\cmake.exe -E rm -f CMakeFiles\videoSourceExample.dir/objects.a
+C:\Qt\Tools\mingw730_64\bin\ar.exe cr CMakeFiles\videoSourceExample.dir/objects.a @CMakeFiles\videoSourceExample.dir\objects1.rsp
+C:\Qt\Tools\mingw730_64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\videoSourceExample.dir/objects.a -Wl,--no-whole-archive  -o videoSourceExample.exe -Wl,--out-implib,libvideoSourceExample.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\videoSourceExample.dir\linklibs.rsp

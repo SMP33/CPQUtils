@@ -1,0 +1,2 @@
+C:\Qt\Tools\mingw730_64\bin\ar.exe qc libWeb.a  CMakeFiles/Web.dir/Web_autogen/mocs_compilation.cpp.obj CMakeFiles/Web.dir/ClientHandlers/AbstractClientHandler.cpp.obj CMakeFiles/Web.dir/ClientHandlers/HttpReplaceClientHandler.cpp.obj CMakeFiles/Web.dir/HandlerController.cpp.obj CMakeFiles/Web.dir/HttpServer.cpp.obj
+C:\Qt\Tools\mingw730_64\bin\ranlib.exe libWeb.a

@@ -1,0 +1,1 @@
+-IC:/Users/mikha/source/repos/CPQUtils/build/src/Vision -IC:/Users/mikha/source/repos/CPQUtils/src/Vision -IC:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Vision_autogen/include -IC:/Qt/5.12.2/mingw73_64/include -IC:/Qt/5.12.2/mingw73_64/include/QtCore -IC:/Qt/5.12.2/mingw73_64/./mkspecs/win32-g++ -isystem D:/opencv/build/install/include 

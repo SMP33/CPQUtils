@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="CPQUtils"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\Qt\;CMake Files\..\..\..\..\..\Qt\5.12.2\;CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\;CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\;CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\;CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5\;CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5Core\;CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5Network\;CMake Files\cmake\;CMake Files\src\;CMake Files\src\Web\;CMake Files\src\Vision\;CMake Files\build-eigen-Desktop_Qt_5_12_2_MinGW_32_bit-Debug\;CMake Files\opencv\;CMake Files\opencv\build\;CMake Files\opencv\build\install\;CMake Files\opencv\build\install\x64\;CMake Files\opencv\build\install\x64\mingw\;CMake Files\opencv\build\install\x64\mingw\lib\;CMake Files\examples\;CMake Files\examples\simpleHttpServer\;CMake Files\examples\videoSourceExample\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="uninstall">
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 uninstall"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Web">
+				<Option output="C:/Users/mikha/source/repos/CPQUtils/build/src/Web/libWeb.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build/src/Web"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/src/Web"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/src/Web"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Web_autogen/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtCore"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/./mkspecs/win32-g++"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtNetwork"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Makefile&quot;  VERBOSE=1 Web"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Web/fast">
+				<Option output="C:/Users/mikha/source/repos/CPQUtils/build/src/Web/libWeb.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build/src/Web"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/src/Web"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/src/Web"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Web_autogen/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtCore"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/./mkspecs/win32-g++"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtNetwork"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Makefile&quot;  VERBOSE=1 Web/fast"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Web_autogen">
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build/src/Web"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Makefile&quot;  VERBOSE=1 Web_autogen"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Vision">
+				<Option output="C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/libVision.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build/src/Vision"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/src/Vision"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/src/Vision"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Vision_autogen/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtCore"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/./mkspecs/win32-g++"/>
+					<Add directory="D:/opencv/build/install/include"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Makefile&quot;  VERBOSE=1 Vision"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Vision/fast">
+				<Option output="C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/libVision.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build/src/Vision"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/src/Vision"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/src/Vision"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Vision_autogen/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtCore"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/./mkspecs/win32-g++"/>
+					<Add directory="D:/opencv/build/install/include"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Makefile&quot;  VERBOSE=1 Vision/fast"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Vision_autogen">
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build/src/Vision"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Makefile&quot;  VERBOSE=1 Vision_autogen"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="simpleHttpServer">
+				<Option output="C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/simpleHttpServer.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_NETWORK_LIB"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/examples/simpleHttpServer"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/simpleHttpServer_autogen/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtCore"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/./mkspecs/win32-g++"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtNetwork"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/Makefile&quot;  VERBOSE=1 simpleHttpServer"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="simpleHttpServer/fast">
+				<Option output="C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/simpleHttpServer.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_NETWORK_LIB"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/examples/simpleHttpServer"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/simpleHttpServer_autogen/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtCore"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/./mkspecs/win32-g++"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtNetwork"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/Makefile&quot;  VERBOSE=1 simpleHttpServer/fast"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="simpleHttpServer_autogen">
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/Makefile&quot;  VERBOSE=1 simpleHttpServer_autogen"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="videoSourceExample">
+				<Option output="C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/videoSourceExample.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_NETWORK_LIB"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/examples/videoSourceExample"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/videoSourceExample_autogen/include"/>
+					<Add directory="D:/opencv/build/install/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtCore"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/./mkspecs/win32-g++"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtNetwork"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/Makefile&quot;  VERBOSE=1 videoSourceExample"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="videoSourceExample/fast">
+				<Option output="C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/videoSourceExample.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_NETWORK_LIB"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/examples/videoSourceExample"/>
+					<Add directory="C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/videoSourceExample_autogen/include"/>
+					<Add directory="D:/opencv/build/install/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtCore"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/./mkspecs/win32-g++"/>
+					<Add directory="C:/Qt/5.12.2/mingw73_64/include/QtNetwork"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed"/>
+					<Add directory="C:/Qt/Tools/mingw730_64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/Makefile&quot;  VERBOSE=1 videoSourceExample/fast"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="videoSourceExample_autogen">
+				<Option working_dir="C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/Makefile&quot;  VERBOSE=1 videoSourceExample_autogen"/>
+					<CompileFile command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Qt/Tools/mingw730_64/bin/mingw32-make.exe -f &quot;C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/simpleHttpServer_autogen/EWIEGA46WW/qrc_resources.cpp">
+			<Option target="simpleHttpServer"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/simpleHttpServer_autogen/EWIEGA46WW/qrc_resources.cpp.rule">
+			<Option target="simpleHttpServer"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/build/examples/simpleHttpServer/simpleHttpServer_autogen/mocs_compilation.cpp">
+			<Option target="simpleHttpServer"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/videoSourceExample_autogen/EWIEGA46WW/qrc_resources.cpp">
+			<Option target="videoSourceExample"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/videoSourceExample_autogen/EWIEGA46WW/qrc_resources.cpp.rule">
+			<Option target="videoSourceExample"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/build/examples/videoSourceExample/videoSourceExample_autogen/mocs_compilation.cpp">
+			<Option target="videoSourceExample"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/build/src/Vision/Vision_autogen/mocs_compilation.cpp">
+			<Option target="Vision"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/build/src/Web/Web_autogen/mocs_compilation.cpp">
+			<Option target="Web"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/examples/simpleHttpServer/resources.qrc">
+			<Option target="simpleHttpServer"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/examples/simpleHttpServer/simpleHttpServer.cpp">
+			<Option target="simpleHttpServer"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/examples/videoSourceExample/resources.qrc">
+			<Option target="videoSourceExample"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/examples/videoSourceExample/videoSourceExample.cpp">
+			<Option target="videoSourceExample"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Vision/CpqVideoCapture/CpqVideoCapture.cpp">
+			<Option target="Vision"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Vision/CpqVideoCapture/CpqVideoCapture.h">
+			<Option target="Vision"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Vision/CpqVideoCapture/CpqVideoCaptureWorker_private.cpp">
+			<Option target="Vision"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Vision/CpqVideoCapture/CpqVideoCaptureWorker_private.h">
+			<Option target="Vision"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Vision/QCVTypes.cpp">
+			<Option target="Vision"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Vision/QCVTypes.h">
+			<Option target="Vision"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Web/ClientHandlers/AbstractClientHandler.cpp">
+			<Option target="Web"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Web/ClientHandlers/AbstractClientHandler.h">
+			<Option target="Web"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Web/ClientHandlers/HttpReplaceClientHandler.cpp">
+			<Option target="Web"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Web/ClientHandlers/HttpReplaceClientHandler.h">
+			<Option target="Web"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Web/HandlerController.cpp">
+			<Option target="Web"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Web/HandlerController.h">
+			<Option target="Web"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Web/HttpServer.cpp">
+			<Option target="Web"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Web/HttpServer.h">
+			<Option target="Web"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/../../../../../Qt/5.12.2/mingw73_64/lib/cmake/Qt5/Qt5Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/../../../../../Qt/5.12.2/mingw73_64/lib/cmake/Qt5/Qt5ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/../../../../../Qt/5.12.2/mingw73_64/lib/cmake/Qt5/Qt5ModuleLocation.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/../../../../../Qt/5.12.2/mingw73_64/lib/cmake/Qt5Core/Qt5CoreConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/../../../../../Qt/5.12.2/mingw73_64/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/../../../../../Qt/5.12.2/mingw73_64/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/../../../../../Qt/5.12.2/mingw73_64/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/../../../../../Qt/5.12.2/mingw73_64/lib/cmake/Qt5Core/Qt5CoreMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/../../../../../Qt/5.12.2/mingw73_64/lib/cmake/Qt5Network/Qt5NetworkConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5Network\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/../../../../../Qt/5.12.2/mingw73_64/lib/cmake/Qt5Network/Qt5NetworkConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5Network\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/../../../../../Qt/5.12.2/mingw73_64/lib/cmake/Qt5Network/Qt5Network_QGenericEnginePlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\Qt\5.12.2\mingw73_64\lib\cmake\Qt5Network\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/cmake/cpq_glob_cpp.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/cmake/cpq_install_headers.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/cmake/subdirList.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/cmake/uninstall.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Web/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\Web\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/src/Vision/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\Vision\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/build-eigen-Desktop_Qt_5_12_2_MinGW_32_bit-Debug/Eigen3Config.cmake">
+			<Option virtualFolder="CMake Files\build-eigen-Desktop_Qt_5_12_2_MinGW_32_bit-Debug\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/build-eigen-Desktop_Qt_5_12_2_MinGW_32_bit-Debug/Eigen3ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\build-eigen-Desktop_Qt_5_12_2_MinGW_32_bit-Debug\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/build-eigen-Desktop_Qt_5_12_2_MinGW_32_bit-Debug/Eigen3Targets.cmake">
+			<Option virtualFolder="CMake Files\build-eigen-Desktop_Qt_5_12_2_MinGW_32_bit-Debug\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/opencv/build/install/OpenCVConfig-version.cmake">
+			<Option virtualFolder="CMake Files\opencv\build\install\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/opencv/build/install/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\opencv\build\install\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/opencv/build/install/x64/mingw/lib/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\opencv\build\install\x64\mingw\lib\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/opencv/build/install/x64/mingw/lib/OpenCVModules-debug.cmake">
+			<Option virtualFolder="CMake Files\opencv\build\install\x64\mingw\lib\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/opencv/build/install/x64/mingw/lib/OpenCVModules.cmake">
+			<Option virtualFolder="CMake Files\opencv\build\install\x64\mingw\lib\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/examples/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\examples\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/examples/simpleHttpServer/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\examples\simpleHttpServer\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/examples/simpleHttpServer/resources.qrc">
+			<Option virtualFolder="CMake Files\examples\simpleHttpServer\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/examples/videoSourceExample/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\examples\videoSourceExample\"/>
+		</Unit>
+		<Unit filename="C:/Users/mikha/source/repos/CPQUtils/examples/videoSourceExample/resources.qrc">
+			<Option virtualFolder="CMake Files\examples\videoSourceExample\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
