@@ -12,10 +12,6 @@
     << "QCPUtils was built without OpenCV. This method does nothing: " +       \
          QString(__FUNCTION__);
 
-#define CPQ_ADD_METATYPE(T)                                                    \
-  Q_DECLARE_METATYPE(T)                                                        \
-  static int T##_CPQ_MetaType_id = qRegisterMetaType<T>(#T);
-
 namespace cv {
 class Mat;
 }
@@ -35,4 +31,9 @@ struct CpqMat
 };
 }
 }
+
+Q_DECLARE_METATYPE(cpq::vis::CpqMat);
+static int cpq_vis_CpqMat_id =
+  qRegisterMetaType<cpq::vis::CpqMat>("cpq::vis::CpqMat");
+
 #endif // QCVTYPES_H

@@ -1,35 +1,39 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <QThread>
+#include <QTimer>
 
-#include <opencv2/opencv.hpp>
+#include "../../src/Vision.h"
+#include "../../src/Web.h"
 
-using namespace cv;
-
-//#include "../../src/Vision.h"
-//#include "../../src/Web.h"
-
-// using namespace cpq;
-// using namespace cpq::vis;
+using namespace cpq;
+using namespace cpq::web;
+using namespace cpq::vis;
 
 int
 main(int argc, char* argv[])
 {
   QCoreApplication a(argc, argv);
 
-  Mat mat;
+  QThread thr;
 
-  auto capture = VideoCapture(0);
+  HttpServer server;
+  server.listen(QHostAddress::Any, 8080);
 
-  while (true) {
-    QThread::sleep(1);
+  server.addRouteCallback(
+    "/", HttpServerCallback(socket, _) {
+      CpqVideoCapture* source = new CpqVideoCapture;
+      source->capture(0);
 
-    capture >> mat;
-    imshow("Video", mat);
-  }
+      HttpReplaceClientHandler* handler = new HttpReplaceClientHandler;
 
-  //  CpqVideoCapture source;
-  //  source.capture(0);
+      new HandlerController(handler, socket);
+      handler->start();
+      QObject::connect(
+        source,
+        CpqVideoCapture::frameCaptured,
+        [=](cpq::vis::CpqMat mat) -> void { handler->updateData(mat.data); });
+    });
 
   return a.exec();
 }

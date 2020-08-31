@@ -20,6 +20,9 @@ public:
   bool capture(QString filename);
   void release();
 
+signals:
+  void frameCaptured(cpq::vis::CpqMat mat);
+
 private:
   CpqVideoCaptureWorker_private* worker;
 };

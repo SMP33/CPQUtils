@@ -7,6 +7,8 @@ using namespace vis;
 
 #include <opencv2/opencv.hpp>
 
+#include "CpqVideoCaptureWorker_private.h"
+
 #endif
 
 #ifdef NO_OPENCV
@@ -32,7 +34,15 @@ CpqVideoCapture::capture(QString filename)
 CpqVideoCapture::CpqVideoCapture(QObject* parent) {}
 bool
 CpqVideoCapture::capture(int index)
-{}
+{
+  worker = new CpqVideoCaptureWorker_private(index, nullptr);
+  connect(worker,
+          CpqVideoCaptureWorker_private::frameCaptured,
+          this,
+          CpqVideoCapture::frameCaptured);
+
+  worker->start();
+}
 
 bool
 CpqVideoCapture::capture(QString filename)

@@ -11,6 +11,9 @@
 #include <QTcpSocket>
 #include <QThread>
 
+#define HttpServerCallback(SOCKET_VAR, REQUEST_VAR)                            \
+  [](QTcpSocket * SOCKET_VAR, cpq::web::HttpRequest REQUEST_VAR)
+
 namespace cpq {
 
 namespace web {

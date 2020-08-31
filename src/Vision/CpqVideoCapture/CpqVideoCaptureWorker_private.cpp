@@ -2,6 +2,7 @@
 
 #include "CpqVideoCaptureWorker_private.h"
 
+using namespace cpq::vis;
 using namespace cv;
 
 CpqVideoCaptureWorker_private::CpqVideoCaptureWorker_private(int index,
@@ -23,7 +24,7 @@ CpqVideoCaptureWorker_private::run()
     this->usleep(1e5);
 
     capture >> mat;
-    imshow("Video", mat);
+    emit frameCaptured(mat);
   }
 }
 
