@@ -6,6 +6,8 @@
 #include "../../src/Vision.h"
 #include "../../src/Web.h"
 
+#include <opencv2/opencv.hpp>
+
 using namespace cpq;
 using namespace cpq::web;
 using namespace cpq::vis;
@@ -25,14 +27,17 @@ main(int argc, char* argv[])
       CpqVideoCapture* source = new CpqVideoCapture;
       source->capture(0);
 
-      HttpReplaceClientHandler* handler = new HttpReplaceClientHandler;
+      HttpReplaceClientHandler* handler =
+        new HttpReplaceClientHandler("image/jpeg");
 
-      new HandlerController(handler, socket);
+      HandlerController::obtain(handler, socket);
+
       handler->start();
-      QObject::connect(
-        source,
-        CpqVideoCapture::frameCaptured,
-        [=](cpq::vis::CpqMat mat) -> void { handler->updateData(mat.data); });
+      QObject::connect(source,
+                       &CpqVideoCapture::frameCaptured,
+                       [=](cpq::vis::CpqMat mat) -> void {
+                         handler->updateData(mat2Jpeg(mat));
+                       });
     });
 
   return a.exec();

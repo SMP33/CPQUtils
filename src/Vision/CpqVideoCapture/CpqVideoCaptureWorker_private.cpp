@@ -15,6 +15,11 @@ CpqVideoCaptureWorker_private::CpqVideoCaptureWorker_private(QString file,
                                                              QObject* parent)
 {}
 
+CpqVideoCaptureWorker_private::~CpqVideoCaptureWorker_private()
+{
+  capture.release();
+}
+
 void
 CpqVideoCaptureWorker_private::run()
 {
@@ -23,8 +28,11 @@ CpqVideoCaptureWorker_private::run()
   while (true) {
     this->usleep(1e5);
 
-    capture >> mat;
-    emit frameCaptured(mat);
+    if (capture.read(mat)) {
+      CpqMat m(mat);
+
+      emit frameCaptured(m);
+    }
   }
 }
 

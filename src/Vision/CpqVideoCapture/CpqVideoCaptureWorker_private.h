@@ -20,6 +20,8 @@ public:
   explicit CpqVideoCaptureWorker_private(int index, QObject* parent);
   explicit CpqVideoCaptureWorker_private(QString file, QObject* parent);
 
+  ~CpqVideoCaptureWorker_private();
+
 signals:
   void frameCaptured(cpq::vis::CpqMat mat);
 

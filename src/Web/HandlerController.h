@@ -15,6 +15,9 @@ public:
   explicit HandlerController(AbstractClientHandler* handler,
                              QTcpSocket* socket,
                              QObject* parent = nullptr);
+
+  static void obtain(AbstractClientHandler* handler, QTcpSocket* socket);
+
 public slots:
   void readFromSocket();
   void readFromHandler(const QByteArray& bytes);

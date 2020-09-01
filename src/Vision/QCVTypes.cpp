@@ -21,11 +21,26 @@ CpqMat::CpqMat(uint16_t width, uint16_t height, int type, uchar* data)
 #ifdef NO_OPENCV
 CpqMat::CpqMat(cv::Mat& mat) {}
 #else
-CpqMat::CpqMat(cv::Mat& mat)
+CpqMat::CpqMat(cv::Mat mat)
 {
   auto s = mat.size();
   size = QSize(s.width, s.height);
   type = mat.type();
-  data = QByteArray((char*)mat.data, size.width() * size.height());
+  data =
+    QByteArray((char*)mat.data, size.width() * size.height() * mat.channels());
 }
+
 #endif
+
+QByteArray
+cpq::vis::mat2Jpeg(cpq::vis::CpqMat mat)
+{
+  std::vector<uchar> buff;
+  cv::Mat m =
+    cv::Mat(mat.size.height(), mat.size.width(), mat.type, mat.data.data());
+  cv::imencode(".jpeg", m, buff);
+  std::string content(buff.begin(), buff.end());
+
+  auto arr = QByteArray::fromStdString(content);
+  return arr;
+}

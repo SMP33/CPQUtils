@@ -24,11 +24,15 @@ struct CpqMat
   CpqMat() = default;
   CpqMat(QSize size, int type, uchar* data);
   CpqMat(uint16_t width, uint16_t heigth, int type, uchar* data);
-  CpqMat(cv::Mat& mat);
+  CpqMat(cv::Mat mat);
   QSize size;
   int type;
   QByteArray data;
 };
+
+QByteArray
+mat2Jpeg(CpqMat mat);
+
 }
 }
 

@@ -24,7 +24,8 @@ signals:
   void frameCaptured(cpq::vis::CpqMat mat);
 
 private:
-  CpqVideoCaptureWorker_private* worker;
+  CpqVideoCaptureWorker_private* worker = nullptr;
+  void clearWorker();
 };
 }
 }

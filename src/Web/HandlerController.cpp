@@ -35,6 +35,12 @@ HandlerController::HandlerController(AbstractClientHandler* handler,
 }
 
 void
+HandlerController::obtain(AbstractClientHandler* handler, QTcpSocket* socket)
+{
+  new HandlerController(handler, socket);
+}
+
+void
 HandlerController::readFromSocket()
 {}
 

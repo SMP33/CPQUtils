@@ -3,7 +3,7 @@ message("========== Library Vision ==========")
 
 find_package(Qt5 REQUIRED COMPONENTS Core)
 find_package(Eigen3)
-find_package(OpenCV REQUIRED)
+find_package(OpenCV)
 
 include_directories(${Qt5Core_INCLUDE_DIRS})
 include_directories(${OpenCV_INCLUDE_DIRS})

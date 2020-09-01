@@ -32,24 +32,37 @@ CpqVideoCapture::capture(QString filename)
 
 #else
 CpqVideoCapture::CpqVideoCapture(QObject* parent) {}
+
 bool
 CpqVideoCapture::capture(int index)
 {
+  clearWorker();
   worker = new CpqVideoCaptureWorker_private(index, nullptr);
   connect(worker,
-          CpqVideoCaptureWorker_private::frameCaptured,
+          &CpqVideoCaptureWorker_private::frameCaptured,
           this,
-          CpqVideoCapture::frameCaptured);
+          &CpqVideoCapture::frameCaptured);
 
   worker->start();
+
+  return true;
 }
 
 bool
 CpqVideoCapture::capture(QString filename)
-{}
+{
+    return true;
+}
 
 void
 CpqVideoCapture::release()
 {}
+
+void
+CpqVideoCapture::clearWorker()
+{
+  delete worker;
+  worker = nullptr;
+}
 
 #endif

@@ -43,7 +43,7 @@ HttpReplaceClientHandler::updateData(QByteArray data)
                            "\r\n"
                            "Content-Length: ";
 
-    subHeader.append(QByteArray::number(subHeader.length()));
+    subHeader.append(QByteArray::number(data.length()));
     subHeader.append("\r\n\r\n");
     subHeader.append(data);
 
@@ -56,12 +56,13 @@ HttpReplaceClientHandler::start()
 {
   QMutexLocker locker(mutex);
 
-  QByteArray header = "HTTP/1.0 200 OK\r\n"
-                      "Server: en.code-bude.net example server\r\n"
-                      "Cache-Control: no-cache\r\n"
-                      "Cache-Control: private\r\n"
-                      "Content-Type: multipart/x-mixed-replace;boundary=" +
-                      boundary + "\r\n\r\n";
+  QByteArray header =
+    "HTTP/1.0 200 OK\r\n"
+    //                      "Server: en.code-bude.net example server\r\n"
+    //    "Cache-Control: no-cache\r\n"
+    //    "Cache-Control: private\r\n"
+    "Content-Type: multipart/x-mixed-replace;boundary=" +
+    boundary + "\r\n\r\n";
 
   emit write(header);
   isStarted = true;
