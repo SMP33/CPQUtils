@@ -15,6 +15,7 @@ public:
   explicit HandlerController(AbstractClientHandler* handler,
                              QTcpSocket* socket,
                              QObject* parent = nullptr);
+  ~HandlerController();
 
   static void obtain(AbstractClientHandler* handler, QTcpSocket* socket);
 

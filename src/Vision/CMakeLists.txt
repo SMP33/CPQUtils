@@ -2,7 +2,7 @@
 message("========== Library Vision ==========")
 
 find_package(Qt5 REQUIRED COMPONENTS Core)
-find_package(Eigen3)
+#find_package(Eigen3)
 find_package(OpenCV)
 
 include_directories(${Qt5Core_INCLUDE_DIRS})
@@ -23,9 +23,9 @@ else() #Build with CV
             "If you don't want to build a project with OpenCV run cmake with option -DNO_OPENCV=ON")
     endif()
     if(NOT Eigen3_FOUND)
-        message(FATAL_ERROR "Eigen3 was not found!"
-            "You can install it from here: https://gitlab.com/libeigen/eigen"
-            "If you want to build project with OpenCV you must install it")
+ #       message(FATAL_ERROR "Eigen3 was not found!"
+ #           "You can install it from here: https://gitlab.com/libeigen/eigen"
+ #           "If you want to build project with OpenCV you must install it")
     endif()
 endif()
 cpq_glob_cpp()

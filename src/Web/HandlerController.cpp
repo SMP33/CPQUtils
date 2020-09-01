@@ -28,10 +28,11 @@ HandlerController::HandlerController(AbstractClientHandler* handler,
           &AbstractClientHandler::socketClosed);
 
   connect(handler, &QObject::destroyed, this, &QObject::deleteLater);
+}
 
-  connect(this, &QObject::destroyed, socket, &QObject::deleteLater);
-
-  connect(this, &QObject::destroyed, handler, &QObject::deleteLater);
+cpq::web::HandlerController::~HandlerController() {
+  handler = nullptr;
+  qDebug() << "Delete Handler";
 }
 
 void

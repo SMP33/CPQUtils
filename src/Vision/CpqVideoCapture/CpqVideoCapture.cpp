@@ -13,10 +13,10 @@ using namespace vis;
 
 #ifdef NO_OPENCV
 CpqVideoCapture::CpqVideoCapture(QObject* parent)
-  : QObject(parent)
-{
-  NO_CV_WARNING()
-}
+  : QObject(parent){ NO_CV_WARNING() }
+
+  cpq::vis::CpqVideoCapture::~CpqVideoCapture()
+{}
 
 bool
 CpqVideoCapture::capture(int index)
@@ -33,25 +33,35 @@ CpqVideoCapture::capture(QString filename)
 #else
 CpqVideoCapture::CpqVideoCapture(QObject* parent) {}
 
+cpq::vis::CpqVideoCapture::~CpqVideoCapture()
+{
+  qDebug() << 1 << QThread::currentThread();
+}
+
 bool
 CpqVideoCapture::capture(int index)
 {
-  clearWorker();
-  worker = new CpqVideoCaptureWorker_private(index, nullptr);
-  connect(worker,
+  return capture(QString::number(index));
+}
+
+bool
+CpqVideoCapture::capture(QString file)
+{
+  worker = QSharedPointer<CpqVideoCaptureWorker_private>(
+    new CpqVideoCaptureWorker_private(file),
+    &CpqVideoCaptureWorker_private::release);
+
+  connect(worker.data(),
           &CpqVideoCaptureWorker_private::frameCaptured,
           this,
           &CpqVideoCapture::frameCaptured);
 
-  worker->start();
+  connect(worker.data(),
+          &CpqVideoCaptureWorker_private::jpegCaptured,
+          this,
+          &CpqVideoCapture::jpegCaptured);
 
-  return true;
-}
-
-bool
-CpqVideoCapture::capture(QString filename)
-{
-    return true;
+  return worker->isOpened();
 }
 
 void
@@ -61,8 +71,6 @@ CpqVideoCapture::release()
 void
 CpqVideoCapture::clearWorker()
 {
-  delete worker;
-  worker = nullptr;
 }
 
 #endif

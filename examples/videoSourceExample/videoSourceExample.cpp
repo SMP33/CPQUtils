@@ -1,5 +1,6 @@
 #include <QCoreApplication>
 #include <QDebug>
+#include <QSharedPointer>
 #include <QThread>
 #include <QTimer>
 
@@ -17,27 +18,36 @@ main(int argc, char* argv[])
 {
   QCoreApplication a(argc, argv);
 
-  QThread thr;
-
   HttpServer server;
   server.listen(QHostAddress::Any, 8080);
 
   server.addRouteCallback(
     "/", HttpServerCallback(socket, _) {
-      CpqVideoCapture* source = new CpqVideoCapture;
-      source->capture(0);
 
       HttpReplaceClientHandler* handler =
         new HttpReplaceClientHandler("image/jpeg");
 
+            CpqVideoCapture* source = new CpqVideoCapture;
+      source->capture(0);
+
       HandlerController::obtain(handler, socket);
 
       handler->start();
+
+      QObject::connect(
+        handler, &QObject::destroyed, source, &QObject::deleteLater);
+
       QObject::connect(source,
-                       &CpqVideoCapture::frameCaptured,
-                       [=](cpq::vis::CpqMat mat) -> void {
-                         handler->updateData(mat2Jpeg(mat));
-                       });
+                       &CpqVideoCapture::jpegCaptured,
+                       handler,
+                       &HttpReplaceClientHandler::updateData);
+
+      // QObject::connect(source,
+      //                 &CpqVideoCapture::frameCaptured,
+      //                 [=](cpq::vis::CpqMat mat) -> void {
+      //                   qDebug() << handler;
+      //                   handler->updateData(mat2Jpeg(mat));
+      //                 });
     });
 
   return a.exec();
