@@ -35,7 +35,7 @@ CpqVideoCapture::CpqVideoCapture(QObject* parent) {}
 
 cpq::vis::CpqVideoCapture::~CpqVideoCapture()
 {
-  qDebug() << 1 << QThread::currentThread();
+  release();
 }
 
 bool
@@ -47,16 +47,16 @@ CpqVideoCapture::capture(int index)
 bool
 CpqVideoCapture::capture(QString file)
 {
-  worker = QSharedPointer<CpqVideoCaptureWorker_private>(
-    new CpqVideoCaptureWorker_private(file),
-    &CpqVideoCaptureWorker_private::release);
 
-  connect(worker.data(),
+  release();
+  worker = CpqVideoCaptureWorker_private::getWorker(file);
+
+  connect(worker,
           &CpqVideoCaptureWorker_private::frameCaptured,
           this,
           &CpqVideoCapture::frameCaptured);
 
-  connect(worker.data(),
+  connect(worker,
           &CpqVideoCaptureWorker_private::jpegCaptured,
           this,
           &CpqVideoCapture::jpegCaptured);
@@ -66,11 +66,11 @@ CpqVideoCapture::capture(QString file)
 
 void
 CpqVideoCapture::release()
-{}
-
-void
-CpqVideoCapture::clearWorker()
 {
+  if (!(worker == nullptr)) {
+    worker->clientRemove();
+    worker = nullptr;
+  }
 }
 
 #endif

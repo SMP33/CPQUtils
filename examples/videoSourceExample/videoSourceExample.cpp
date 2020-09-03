@@ -18,6 +18,8 @@ main(int argc, char* argv[])
 {
   QCoreApplication a(argc, argv);
 
+  qDebug() << "App started";
+
   HttpServer server;
   server.listen(QHostAddress::Any, 8080);
 

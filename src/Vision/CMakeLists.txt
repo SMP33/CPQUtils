@@ -30,8 +30,4 @@ else() #Build with CV
 endif()
 cpq_glob_cpp()
 add_library(Vision ${SOURCE_CPP})
-target_link_libraries(Vision PUBLIC ${OpenCV_LIBS})
-
 message("")
-
-

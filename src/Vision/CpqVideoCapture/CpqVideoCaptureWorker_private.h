@@ -3,6 +3,7 @@
 
 #include <QMap>
 #include <QMutex>
+#include <QMutexLocker>
 #include <QObject>
 #include <QSharedPointer>
 #include <QThread>
@@ -18,10 +19,12 @@ class CpqVideoCaptureWorker_private : public QThread
 {
   Q_OBJECT
 public:
-  explicit CpqVideoCaptureWorker_private(QString camera);
   bool isOpened() const;
 
-  ~CpqVideoCaptureWorker_private();
+  void clientAdd();
+  void clientRemove();
+
+  static CpqVideoCaptureWorker_private* getWorker(QString url);
 
 public slots:
   void release();
@@ -34,13 +37,22 @@ protected:
   void run();
 
 private:
+  explicit CpqVideoCaptureWorker_private(QString url);
+
+  mutable QMutex mutex;
+
   bool continueRun() const;
   bool m_continueRun = true;
-
-  QMutex mutex;
   bool m_isOpened = false;
+
+  unsigned int m_count = 0;
+
+  QString m_url;
+
   cv::VideoCapture capture;
-  QMap<QString, QSharedPointer<CpqVideoCaptureWorker_private>> cameras;
+
+  static QMutex* static_mutex;
+  static QMap<QString, CpqVideoCaptureWorker_private*>* static_cameras;
 };
 }
 }

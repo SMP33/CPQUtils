@@ -28,8 +28,7 @@ signals:
   void jpegCaptured(QByteArray jpeg);
 
 private:
-  QSharedPointer<CpqVideoCaptureWorker_private> worker = nullptr;
-  void clearWorker();
+  CpqVideoCaptureWorker_private* worker = nullptr;
 };
 }
 }
