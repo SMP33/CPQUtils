@@ -1,28 +1,47 @@
 #ifndef NO_OPENCV
 
 #include "CpqVideoCaptureWorker_private.h"
+#include "qcoreapplication.h"
 
 using namespace cpq::vis;
 using namespace cv;
 
 QMutex* CpqVideoCaptureWorker_private::static_mutex = new QMutex();
-QMap<QString, CpqVideoCaptureWorker_private*>*
+QMap<int, CpqVideoCaptureWorker_private*>*
   CpqVideoCaptureWorker_private::static_cameras =
-    new QMap<QString, CpqVideoCaptureWorker_private*>;
+    new QMap<int, CpqVideoCaptureWorker_private*>;
+
+bool
+isNumber(QString str)
+{
+  bool isNum = false;
+  str.toInt(&isNum);
+
+  return isNum;
+}
 
 CpqVideoCaptureWorker_private::CpqVideoCaptureWorker_private(QString url)
-  : QThread(nullptr)
+  : QThread(new QThread)
   , m_url(url)
+  , captureType(Type::URL)
 {
-  bool isInt = false;
-  url.toInt(&isInt);
+  capture = VideoCapture(url.toStdString());
 
-  if (isInt) {
-    capture = VideoCapture(url.toInt());
-  } else {
-    capture = VideoCapture(url.toStdString());
+  m_isOpened = capture.isOpened();
+
+  if (m_isOpened) {
+    start();
   }
+  clientAdd();
+}
 
+CpqVideoCaptureWorker_private::CpqVideoCaptureWorker_private(int index)
+  : QThread(new QThread)
+  , m_index(index)
+  , captureType(Type::INDEX)
+{
+
+  capture = VideoCapture(index);
   m_isOpened = capture.isOpened();
 
   if (m_isOpened) {
@@ -36,10 +55,19 @@ cpq::vis::CpqVideoCaptureWorker_private::release()
   QMutexLocker lock(&mutex);
   QMutexLocker lock_static(static_mutex);
 
-  static_cameras->remove(m_url);
-  m_continueRun = false;
+  if (captureType == INDEX) {
+    static_cameras->remove(m_index);
+  } else {
+  }
 
-  qDebug() << "Release camera";
+  connect(this, &QObject::destroyed, [=]() {});
+
+  if (!m_isOpened) {
+    deleteLater();
+  } else {
+    m_continueRun = false;
+    connect(this, &QThread::finished, this, &QObject::deleteLater);
+  }
 }
 
 bool
@@ -54,17 +82,21 @@ cpq::vis::CpqVideoCaptureWorker_private::clientAdd()
 {
   QMutexLocker lock(&mutex);
   m_count++;
-  qDebug() << "+";
+}
+
+bool
+cpq::vis::CpqVideoCaptureWorker_private::clientsCount() const
+{
+  QMutexLocker lock(&mutex);
+  return m_count;
 }
 
 void
 cpq::vis::CpqVideoCaptureWorker_private::clientRemove()
 {
-  qDebug() << "-";
   mutex.lock();
   m_count--;
   bool ok = m_count;
-  qDebug() << m_count;
   mutex.unlock();
 
   if (!ok) {
@@ -73,42 +105,49 @@ cpq::vis::CpqVideoCaptureWorker_private::clientRemove()
 }
 
 CpqVideoCaptureWorker_private*
-CpqVideoCaptureWorker_private::getWorker(QString url)
+CpqVideoCaptureWorker_private::getWorker(int index)
 {
   QMutexLocker lock_static(static_mutex);
 
-  if (!static_cameras->contains(url)) {
-    static_cameras->insert(url, new CpqVideoCaptureWorker_private(url));
+  if (!static_cameras->contains(index)) {
+    static_cameras->insert(index, new CpqVideoCaptureWorker_private(index));
   }
 
-
-  static_cameras->operator[](url)->clientAdd();
-  return static_cameras->operator[](url);
+  static_cameras->operator[](index)->clientAdd();
+  return static_cameras->operator[](index);
 }
 
 void
 CpqVideoCaptureWorker_private::run()
 {
   Mat mat;
+  QElapsedTimer timer;
+  int fps = 0;
+  timer.start();
 
   while (continueRun()) {
-    this->usleep(1e5);
-
     if (capture.read(mat)) {
+
       CpqMat m(mat);
+      //this->usleep(1e3);
 
       emit frameCaptured(m);
       emit jpegCaptured(mat2Jpeg(m));
     }
+    fps++;
+    if (timer.nsecsElapsed() > 1e9) {
+      qDebug() << "fps:" << fps;
+      fps = 0;
+      timer.restart();
+    }
   }
-  qDebug() << capture.isOpened();
-
-  deleteLater();
+  // deleteLater();
 }
 
 bool
 cpq::vis::CpqVideoCaptureWorker_private::continueRun() const
 {
+  QMutexLocker lock(&mutex);
   return m_continueRun;
 }
 

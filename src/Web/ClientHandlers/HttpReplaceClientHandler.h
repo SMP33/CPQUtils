@@ -30,6 +30,7 @@ private:
   QByteArray contentType;
   QByteArray boundary;
   bool isStarted;
+  bool closedBeforeStart;
   QMutex* mutex;
 };
 

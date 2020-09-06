@@ -31,6 +31,7 @@ HandlerController::HandlerController(AbstractClientHandler* handler,
 }
 
 cpq::web::HandlerController::~HandlerController() {
+
   handler = nullptr;
 }
 

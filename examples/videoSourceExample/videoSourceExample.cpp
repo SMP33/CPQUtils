@@ -22,27 +22,41 @@ main(int argc, char* argv[])
 
   HttpServer server;
   server.listen(QHostAddress::Any, 8080);
-
   server.addRouteCallback(
-    "/", HttpServerCallback(socket, _) {
+    "/", HttpServerCallback(socket, request) {
+      CpqVideoCapture* source = new CpqVideoCapture;
+      QThread* thr = new QThread;
 
       HttpReplaceClientHandler* handler =
         new HttpReplaceClientHandler("image/jpeg");
-
-            CpqVideoCapture* source = new CpqVideoCapture;
-      source->capture(0);
-
-      HandlerController::obtain(handler, socket);
-
-      handler->start();
+      auto* controller = new HandlerController(handler, socket);
 
       QObject::connect(
-        handler, &QObject::destroyed, source, &QObject::deleteLater);
+        socket, &QObject::destroyed, []() { qDebug() << " - socket(("; });
 
-      QObject::connect(source,
-                       &CpqVideoCapture::jpegCaptured,
-                       handler,
-                       &HttpReplaceClientHandler::updateData);
+      QObject::connect(thr, &QThread::started, [=]() {
+        bool ok = false;
+
+        if (request.route == "/") {
+          ok = source->capture(0);
+        } else {
+          // request.route.right(request.route.length() - 1);
+          ok = source->capture("http://123localhost/asd");
+        }
+        if (ok) {
+          QObject::connect(
+            controller, &QObject::destroyed, source, &QObject::deleteLater);
+          QObject::connect(source,
+                           &CpqVideoCapture::jpegCaptured,
+                           handler,
+                           &HttpReplaceClientHandler::updateData);
+          QObject::connect(thr, &QThread::finished, thr, &QThread::deleteLater);
+
+          handler->start();
+        }
+      });
+
+      thr->start();
 
       // QObject::connect(source,
       //                 &CpqVideoCapture::frameCaptured,

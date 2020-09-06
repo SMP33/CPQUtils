@@ -18,9 +18,13 @@ public slots:
   virtual void socketClosed();
 
 signals:
+  /// @brief Запись данных в сокет
   void write(const QByteArray& data);
+  /// @brief Запрос на закрытие сокета
   void closeSocket();
+  /// @brief Сигнал после закрытия сокета
   void disconnected();
+  /// @brief Сигнал начала работы
   void started();
 };
 

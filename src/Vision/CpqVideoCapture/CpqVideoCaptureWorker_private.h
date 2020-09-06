@@ -1,6 +1,7 @@
 #ifndef CPQVIDEOCAPTUREWORKER_PRIVATE_H
 #define CPQVIDEOCAPTUREWORKER_PRIVATE_H
 
+#include <QElapsedTimer>
 #include <QMap>
 #include <QMutex>
 #include <QMutexLocker>
@@ -20,14 +21,10 @@ class CpqVideoCaptureWorker_private : public QThread
   Q_OBJECT
 public:
   bool isOpened() const;
-
-  void clientAdd();
+  bool clientsCount() const;
   void clientRemove();
-
-  static CpqVideoCaptureWorker_private* getWorker(QString url);
-
-public slots:
-  void release();
+  explicit CpqVideoCaptureWorker_private(QString url);
+  static CpqVideoCaptureWorker_private* getWorker(int index);
 
 signals:
   void frameCaptured(cpq::vis::CpqMat mat);
@@ -37,22 +34,33 @@ protected:
   void run();
 
 private:
-  explicit CpqVideoCaptureWorker_private(QString url);
+  enum Type
+  {
+    URL,
+    INDEX
+  };
 
-  mutable QMutex mutex;
+  Type captureType;
+  explicit CpqVideoCaptureWorker_private(int index);
+  void release();
 
   bool continueRun() const;
+
+  mutable QMutex mutex;
   bool m_continueRun = true;
   bool m_isOpened = false;
+
+  void clientAdd();
 
   unsigned int m_count = 0;
 
   QString m_url;
+  int m_index;
 
   cv::VideoCapture capture;
 
   static QMutex* static_mutex;
-  static QMap<QString, CpqVideoCaptureWorker_private*>* static_cameras;
+  static QMap<int, CpqVideoCaptureWorker_private*>* static_cameras;
 };
 }
 }

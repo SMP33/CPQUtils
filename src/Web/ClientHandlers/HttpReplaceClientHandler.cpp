@@ -11,6 +11,7 @@ HttpReplaceClientHandler::HttpReplaceClientHandler(QByteArray contentType,
   , contentType(contentType)
   , boundary(boundary)
   , isStarted(false)
+  , closedBeforeStart(false)
   , mutex(new QMutex)
 {}
 
@@ -24,10 +25,13 @@ void
 HttpReplaceClientHandler::socketClosed()
 {
   QMutexLocker locker(mutex);
-  isStarted = false;
-
-  emit disconnected();
-  deleteLater();
+  if (!isStarted) {
+    closedBeforeStart = true;
+  } else {
+    isStarted = false;
+    emit disconnected();
+    deleteLater();
+  }
 }
 
 void
@@ -54,18 +58,26 @@ HttpReplaceClientHandler::updateData(QByteArray data)
 void
 HttpReplaceClientHandler::start()
 {
+
   QMutexLocker locker(mutex);
-
-  QByteArray header =
-    "HTTP/1.0 200 OK\r\n"
-    //                      "Server: en.code-bude.net example server\r\n"
-    //    "Cache-Control: no-cache\r\n"
-    //    "Cache-Control: private\r\n"
-    "Content-Type: multipart/x-mixed-replace;boundary=" +
-    boundary + "\r\n\r\n";
-
-  emit write(header);
   isStarted = true;
 
-  emit started();
+  if (closedBeforeStart) {
+    emit started();
+    emit disconnected();
+    deleteLater();
+  } else {
+    QByteArray header =
+      "HTTP/1.0 200 OK\r\n"
+      //                      "Server: en.code-bude.net example server\r\n"
+      //    "Cache-Control: no-cache\r\n"
+      //    "Cache-Control: private\r\n"
+      "Content-Type: multipart/x-mixed-replace;boundary=" +
+      boundary + "\r\n\r\n";
+
+    emit write(header);
+    emit started();
+  }
+
+  
 }

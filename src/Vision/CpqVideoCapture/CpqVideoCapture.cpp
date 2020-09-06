@@ -41,15 +41,8 @@ cpq::vis::CpqVideoCapture::~CpqVideoCapture()
 bool
 CpqVideoCapture::capture(int index)
 {
-  return capture(QString::number(index));
-}
-
-bool
-CpqVideoCapture::capture(QString file)
-{
-
   release();
-  worker = CpqVideoCaptureWorker_private::getWorker(file);
+  worker = CpqVideoCaptureWorker_private::getWorker(index);
 
   connect(worker,
           &CpqVideoCaptureWorker_private::frameCaptured,
@@ -61,7 +54,37 @@ CpqVideoCapture::capture(QString file)
           this,
           &CpqVideoCapture::jpegCaptured);
 
-  return worker->isOpened();
+  if (!worker->isOpened()) {
+    release();
+    return false;
+  } else {
+    return true;
+  }
+}
+
+bool
+CpqVideoCapture::capture(QString file)
+{
+
+  release();
+  worker = new CpqVideoCaptureWorker_private(file);
+
+  connect(worker,
+          &CpqVideoCaptureWorker_private::frameCaptured,
+          this,
+          &CpqVideoCapture::frameCaptured);
+
+  connect(worker,
+          &CpqVideoCaptureWorker_private::jpegCaptured,
+          this,
+          &CpqVideoCapture::jpegCaptured);
+
+  if (!worker->isOpened()) {
+    release();
+    return false;
+  } else {
+    return true;
+  }
 }
 
 void
