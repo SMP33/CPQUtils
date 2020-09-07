@@ -5,9 +5,9 @@ include_directories(${Qt5Core_INCLUDE_DIRS})
 include_directories(${Qt5Network_INCLUDE_DIRS})
 
 if(OpenCV_FOUND)
-add_executable(videoSourceExample videoSourceExample.cpp resources.qrc)
+add_executable(arucoDetectorExample arucoDetectorExample.cpp resources.qrc)
 
-target_link_libraries(videoSourceExample
+target_link_libraries(arucoDetectorExample
     Web
     Vision
     ${OpenCV_LIBS}

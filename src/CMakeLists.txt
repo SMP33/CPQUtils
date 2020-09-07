@@ -1,3 +1,4 @@
+add_subdirectory("Core")
 add_subdirectory("Web")
 add_subdirectory("Vision")
 

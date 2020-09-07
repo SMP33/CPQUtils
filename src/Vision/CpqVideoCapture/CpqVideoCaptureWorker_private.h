@@ -4,10 +4,8 @@
 #include <QElapsedTimer>
 #include <QMap>
 #include <QMutex>
-#include <QMutexLocker>
 #include <QObject>
-#include <QSharedPointer>
-#include <QThread>
+#include <QTimer>
 
 #include <opencv2/opencv.hpp>
 
@@ -16,7 +14,7 @@
 namespace cpq {
 namespace vis {
 
-class CpqVideoCaptureWorker_private : public QThread
+class CpqVideoCaptureWorker_private : public QObject
 {
   Q_OBJECT
 public:
@@ -26,14 +24,15 @@ public:
   explicit CpqVideoCaptureWorker_private(QString url);
   static CpqVideoCaptureWorker_private* getWorker(int index);
 
+public slots:
+  void onGrabbed();
+
 signals:
   void frameCaptured(cpq::vis::CpqMat mat);
   void jpegCaptured(QByteArray jpeg);
 
-protected:
-  void run();
-
 private:
+  void start();
   enum Type
   {
     URL,
@@ -41,13 +40,11 @@ private:
   };
 
   Type captureType;
+
+  QTimer timer;
+
   explicit CpqVideoCaptureWorker_private(int index);
   void release();
-
-  bool continueRun() const;
-
-  mutable QMutex mutex;
-  bool m_continueRun = true;
   bool m_isOpened = false;
 
   void clientAdd();

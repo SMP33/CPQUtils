@@ -2,8 +2,8 @@
 #define VIDEOSOURCE_H
 
 #include <QObject>
-#include <QtDebug>
 #include <QSharedPointer>
+#include <QDebug>
 
 #include "../QCVTypes.h"
 
@@ -23,12 +23,22 @@ public:
   bool capture(QString file);
   void release();
 
+public slots:
+  virtual void onFrameCaptured(cpq::vis::CpqMat mat);
+  virtual void onJpegCaptured(QByteArray jpeg);
+
 signals:
   void frameCaptured(cpq::vis::CpqMat mat);
   void jpegCaptured(QByteArray jpeg);
+  void captured();
+  void released();
+
+protected:
+  bool checkFrameSender();
 
 private:
   CpqVideoCaptureWorker_private* worker = nullptr;
+  void connectWorker();
 };
 }
 }

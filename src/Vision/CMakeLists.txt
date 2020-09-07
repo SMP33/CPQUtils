@@ -29,5 +29,5 @@ else() #Build with CV
     endif()
 endif()
 cpq_glob_cpp()
-add_library(Vision ${SOURCE_CPP})
+add_library(Vision ${SOURCE_CPP} "Aruco/ArucoDetector.h" "Aruco/ArucoDetector.cpp")
 message("")

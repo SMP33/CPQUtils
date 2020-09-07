@@ -36,7 +36,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake
 message("BD: ${CMAKE_CURRENT_BINARY_DIR}")
 
 install(TARGETS
-        Web Vision
+        Web Vision Core
         EXPORT Targets
     ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
     LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib

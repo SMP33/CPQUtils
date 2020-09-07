@@ -43,21 +43,13 @@ CpqVideoCapture::capture(int index)
 {
   release();
   worker = CpqVideoCaptureWorker_private::getWorker(index);
-
-  connect(worker,
-          &CpqVideoCaptureWorker_private::frameCaptured,
-          this,
-          &CpqVideoCapture::frameCaptured);
-
-  connect(worker,
-          &CpqVideoCaptureWorker_private::jpegCaptured,
-          this,
-          &CpqVideoCapture::jpegCaptured);
+  connectWorker();
 
   if (!worker->isOpened()) {
     release();
     return false;
   } else {
+    emit captured();
     return true;
   }
 }
@@ -68,21 +60,13 @@ CpqVideoCapture::capture(QString file)
 
   release();
   worker = new CpqVideoCaptureWorker_private(file);
-
-  connect(worker,
-          &CpqVideoCaptureWorker_private::frameCaptured,
-          this,
-          &CpqVideoCapture::frameCaptured);
-
-  connect(worker,
-          &CpqVideoCaptureWorker_private::jpegCaptured,
-          this,
-          &CpqVideoCapture::jpegCaptured);
+  connectWorker();
 
   if (!worker->isOpened()) {
     release();
     return false;
   } else {
+    emit captured();
     return true;
   }
 }
@@ -93,6 +77,43 @@ CpqVideoCapture::release()
   if (!(worker == nullptr)) {
     worker->clientRemove();
     worker = nullptr;
+  }
+  emit released();
+}
+
+bool
+cpq::vis::CpqVideoCapture::checkFrameSender()
+{
+  return sender() == worker;
+}
+
+void
+cpq::vis::CpqVideoCapture::connectWorker()
+{
+  connect(worker,
+          &CpqVideoCaptureWorker_private::frameCaptured,
+          this,
+          &CpqVideoCapture::onFrameCaptured);
+
+  connect(worker,
+          &CpqVideoCaptureWorker_private::jpegCaptured,
+          this,
+          &CpqVideoCapture::onJpegCaptured);
+}
+
+void
+CpqVideoCapture::onFrameCaptured(cpq::vis::CpqMat mat)
+{
+  if (checkFrameSender()) {
+    emit frameCaptured(mat);
+  }
+}
+void
+CpqVideoCapture::onJpegCaptured(QByteArray jpeg)
+{
+
+  if (checkFrameSender()) {
+    emit jpegCaptured(jpeg);
   }
 }
 

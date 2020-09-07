@@ -1,7 +1,6 @@
 #ifndef NO_OPENCV
 
 #include "CpqVideoCaptureWorker_private.h"
-#include "qcoreapplication.h"
 
 using namespace cpq::vis;
 using namespace cv;
@@ -21,22 +20,19 @@ isNumber(QString str)
 }
 
 CpqVideoCaptureWorker_private::CpqVideoCaptureWorker_private(QString url)
-  : QThread(new QThread)
+  : QObject(nullptr)
   , m_url(url)
   , captureType(Type::URL)
 {
   capture = VideoCapture(url.toStdString());
 
   m_isOpened = capture.isOpened();
-
-  if (m_isOpened) {
-    start();
-  }
+  start();
   clientAdd();
 }
 
 CpqVideoCaptureWorker_private::CpqVideoCaptureWorker_private(int index)
-  : QThread(new QThread)
+  : QObject(nullptr)
   , m_index(index)
   , captureType(Type::INDEX)
 {
@@ -44,60 +40,44 @@ CpqVideoCaptureWorker_private::CpqVideoCaptureWorker_private(int index)
   capture = VideoCapture(index);
   m_isOpened = capture.isOpened();
 
-  if (m_isOpened) {
-    start();
-  }
+start();
 }
 
 void
 cpq::vis::CpqVideoCaptureWorker_private::release()
 {
-  QMutexLocker lock(&mutex);
-  QMutexLocker lock_static(static_mutex);
 
   if (captureType == INDEX) {
     static_cameras->remove(m_index);
   } else {
   }
 
-  connect(this, &QObject::destroyed, [=]() {});
-
-  if (!m_isOpened) {
     deleteLater();
-  } else {
-    m_continueRun = false;
-    connect(this, &QThread::finished, this, &QObject::deleteLater);
-  }
 }
 
 bool
 cpq::vis::CpqVideoCaptureWorker_private::isOpened() const
 {
-  QMutexLocker lock(&mutex);
   return m_isOpened;
 }
 
 void
 cpq::vis::CpqVideoCaptureWorker_private::clientAdd()
 {
-  QMutexLocker lock(&mutex);
   m_count++;
 }
 
 bool
 cpq::vis::CpqVideoCaptureWorker_private::clientsCount() const
 {
-  QMutexLocker lock(&mutex);
   return m_count;
 }
 
 void
 cpq::vis::CpqVideoCaptureWorker_private::clientRemove()
 {
-  mutex.lock();
   m_count--;
   bool ok = m_count;
-  mutex.unlock();
 
   if (!ok) {
     release();
@@ -118,37 +98,30 @@ CpqVideoCaptureWorker_private::getWorker(int index)
 }
 
 void
-CpqVideoCaptureWorker_private::run()
+cpq::vis::CpqVideoCaptureWorker_private::start()
 {
-  Mat mat;
-  QElapsedTimer timer;
-  int fps = 0;
-  timer.start();
-
-  while (continueRun()) {
-    if (capture.read(mat)) {
-
-      CpqMat m(mat);
-      //this->usleep(1e3);
-
-      emit frameCaptured(m);
-      emit jpegCaptured(mat2Jpeg(m));
-    }
-    fps++;
-    if (timer.nsecsElapsed() > 1e9) {
-      qDebug() << "fps:" << fps;
-      fps = 0;
-      timer.restart();
-    }
+  if (m_isOpened) {
+    //timer.setTimerType(Qt::TimerType::PreciseTimer);
+    timer.start(30);
+    timer.callOnTimeout(this, &CpqVideoCaptureWorker_private::onGrabbed);
   }
-  // deleteLater();
 }
 
-bool
-cpq::vis::CpqVideoCaptureWorker_private::continueRun() const
+void
+CpqVideoCaptureWorker_private::onGrabbed()
 {
-  QMutexLocker lock(&mutex);
-  return m_continueRun;
+  Mat mat;
+  Mat local_mat;
+  if (capture.read(mat)) {
+
+    mat.copyTo(local_mat);
+
+    CpqMat m(local_mat);
+    // this->usleep(1e3);
+
+    emit frameCaptured(m);
+    emit jpegCaptured(mat2Jpeg(m));
+  }
 }
 
 #endif
