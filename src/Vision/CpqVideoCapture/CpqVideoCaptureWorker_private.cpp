@@ -40,7 +40,7 @@ CpqVideoCaptureWorker_private::CpqVideoCaptureWorker_private(int index)
   capture = VideoCapture(index);
   m_isOpened = capture.isOpened();
 
-start();
+  start();
 }
 
 void
@@ -52,7 +52,7 @@ cpq::vis::CpqVideoCaptureWorker_private::release()
   } else {
   }
 
-    deleteLater();
+  deleteLater();
 }
 
 bool
@@ -101,9 +101,13 @@ void
 cpq::vis::CpqVideoCaptureWorker_private::start()
 {
   if (m_isOpened) {
-    //timer.setTimerType(Qt::TimerType::PreciseTimer);
+    // timer.setTimerType(Qt::TimerType::PreciseTimer);
     timer.start(30);
-    timer.callOnTimeout(this, &CpqVideoCaptureWorker_private::onGrabbed);
+
+    connect(&timer,
+            &QTimer::timeout,
+            this,
+            &CpqVideoCaptureWorker_private::onGrabbed);
   }
 }
 

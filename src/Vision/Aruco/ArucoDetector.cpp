@@ -12,7 +12,7 @@ ArucoDetector::ArucoDetector(QObject* parent)
 
   timer.setTimerType(Qt::TimerType::PreciseTimer);
   timer.start(50);
-  timer.callOnTimeout(this, &ArucoDetector::computePosition);
+  connect(&timer, &QTimer::timeout, this, &ArucoDetector::computePosition);
 }
 
 void
