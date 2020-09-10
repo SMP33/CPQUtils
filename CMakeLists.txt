@@ -15,9 +15,15 @@ set(CPQUtils_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/include)
 
 find_package(Qt5 REQUIRED COMPONENTS Core Network)
 
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
+include_directories(${EIGEN3_INCLUDE_DIR})
+
+message("${EIGEN3_INCLUDE_DIR}")
+
 include("cmake/subdirList.cmake")
 include("cmake/cpq_install_headers.cmake")
 include("cmake/cpq_glob_cpp.cmake")
+#include("cmake/doxyCmake.cmake")
 
 add_subdirectory("src")
 add_subdirectory("examples")
@@ -25,6 +31,13 @@ add_subdirectory("examples")
 add_custom_target(uninstall
     "${CMAKE_COMMAND}" -P "uninstall.cmake"
     )
+
+    
+#SET(DOXY_OUTPUT_LANGUAGE "Russian")
+#SET(DOXY_INPUT ${PROJECT_SOURCE_DIR}/src)
+#ADD_DOCUMENTATION(doc Doxyfile)
+
+
 configure_file(cmake/uninstall.cmake uninstall.cmake @ONLY)
 
 configure_file(cmake/CPQUtilsConfig.cmake CPQUtilsConfig.cmake)
@@ -32,8 +45,6 @@ configure_file(cmake/CPQUtilsConfig.cmake CPQUtilsConfig.cmake)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake
   DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/${CMAKE_PROJECT_NAME}
 )
-
-message("BD: ${CMAKE_CURRENT_BINARY_DIR}")
 
 install(TARGETS
         Web Vision Core

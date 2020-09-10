@@ -21,6 +21,8 @@ public:
   bool isOpened() const;
   bool clientsCount() const;
   void clientRemove();
+  bool set(int propId, double value);
+
   explicit CpqVideoCaptureWorker_private(QString url);
   static CpqVideoCaptureWorker_private* getWorker(int index);
 

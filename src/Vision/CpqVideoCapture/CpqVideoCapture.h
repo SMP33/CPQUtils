@@ -1,9 +1,9 @@
 #ifndef VIDEOSOURCE_H
 #define VIDEOSOURCE_H
 
+#include <QDebug>
 #include <QObject>
 #include <QSharedPointer>
-#include <QDebug>
 
 #include "../QCVTypes.h"
 
@@ -12,6 +12,7 @@ namespace vis {
 
 class CpqVideoCaptureWorker_private;
 
+/// @brief cv::VideoCapture wrapper for Qt
 class CpqVideoCapture : public QObject
 {
   Q_OBJECT
@@ -19,9 +20,15 @@ public:
   explicit CpqVideoCapture(QObject* parent = nullptr);
   ~CpqVideoCapture();
 
+  /// @brief See cv::VideoCapture::capture(int)
   bool capture(int index = 0);
+
+  /// @brief See cv::VideoCapture::capture(string)
   bool capture(QString file);
+  /// @brief See cv::VideoCapture::release()
   void release();
+  /// @brief See cv::VideoCapture::set()
+  bool set(int propId, double value);
 
 public slots:
   virtual void onFrameCaptured(cpq::vis::CpqMat mat);
@@ -30,8 +37,8 @@ public slots:
 signals:
   void frameCaptured(cpq::vis::CpqMat mat);
   void jpegCaptured(QByteArray jpeg);
-  void captured();
-  void released();
+  void captureStarted();
+  void captureReleased();
 
 protected:
   bool checkFrameSender();

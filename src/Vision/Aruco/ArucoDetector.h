@@ -1,13 +1,14 @@
 #pragma once
 
-#include <QObject>
-#include <QTimer>
 #include <QElapsedTimer>
-#include <QThread>
 #include <QMutex>
+#include <QObject>
+#include <QThread>
+#include <QTimer>
 
 #include "../../Core.h"
 #include "../CpqVideoCapture/CpqVideoCapture.h"
+#include "Common.h"
 
 cpq_start_namespace(vis)
 
@@ -15,26 +16,49 @@ cpq_start_namespace(vis)
 {
   Q_OBJECT
 public:
+  struct DetectorSettings
+  {
+    DetectorSettings(cv::aruco::Board* board = nullptr,
+                     cv::Mat* camera_matrix = nullptr,
+                     cv::Mat* dist_coeffs = nullptr);
+
+    bool isOk();
+
+    std::shared_ptr<cv::aruco::Board> board;
+    std::shared_ptr<cv::Mat> camera_matrix;
+    std::shared_ptr<cv::Mat> distorsion_array;
+  };
+
   ArucoDetector(QObject* parent = nullptr);
+  ~ArucoDetector();
+
+  uint getComputePeriod();
 
 public slots:
   virtual void onJpegCaptured(QByteArray jpeg) override;
-  virtual void onFrameCaptured(CpqMat mat) override;
+  virtual void onFrameCaptured(CpqMat frame) override;
+  void setComputePeriod(uint ms);
+  void setSettings(DetectorSettings settings);
+
+  void onCaptureStarted();
+  void onCaptureReleased();
 
 private:
   void computePosition();
 
-  CpqMat mat;
+  QMutex mutex;
+  DetectorSettings settings;
+
   bool frameUpdated = false;
-
-  QTimer timer;
-
-  QElapsedTimer fpsTimer;
+  CpqMat lastFrame;
+  cv::Mat* frame;
 
   uint fps = 1000;
   uint fps_count = 0;
-  uint nsec = 1;
+  uint m_computePeriod = 1e3 / 50;
 
+  QTimer computeTimer;
+  QElapsedTimer fpsTimer;
 };
 
 cpq_end_namespace

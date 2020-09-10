@@ -49,7 +49,7 @@ CpqVideoCapture::capture(int index)
     release();
     return false;
   } else {
-    emit captured();
+    emit captureStarted();
     return true;
   }
 }
@@ -66,7 +66,7 @@ CpqVideoCapture::capture(QString file)
     release();
     return false;
   } else {
-    emit captured();
+    emit captureStarted();
     return true;
   }
 }
@@ -78,7 +78,17 @@ CpqVideoCapture::release()
     worker->clientRemove();
     worker = nullptr;
   }
-  emit released();
+  emit captureReleased();
+}
+
+bool
+cpq::vis::CpqVideoCapture::set(int propId, double value)
+{
+  if (worker) {
+    worker->set(propId,value);
+  } else {
+    return false;
+  }
 }
 
 bool

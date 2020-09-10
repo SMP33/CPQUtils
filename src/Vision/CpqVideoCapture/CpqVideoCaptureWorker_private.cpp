@@ -84,6 +84,18 @@ cpq::vis::CpqVideoCaptureWorker_private::clientRemove()
   }
 }
 
+bool
+cpq::vis::CpqVideoCaptureWorker_private::set(int propId, double value)
+{
+  capture.set(propId, value);
+  if (propId == cv::CAP_PROP_FPS) {
+    if (value > 0) {
+      timer.setInterval(1e3 / value);
+    }
+  }
+  return false;
+}
+
 CpqVideoCaptureWorker_private*
 CpqVideoCaptureWorker_private::getWorker(int index)
 {
@@ -102,7 +114,7 @@ cpq::vis::CpqVideoCaptureWorker_private::start()
 {
   if (m_isOpened) {
     // timer.setTimerType(Qt::TimerType::PreciseTimer);
-    timer.start(30);
+    timer.start(33);
 
     connect(&timer,
             &QTimer::timeout,
