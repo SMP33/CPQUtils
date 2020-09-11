@@ -84,7 +84,7 @@ arucoMapToBoard(ArucoMarkerMap& markersMap,
     }
   }
 
-  emptyBoard = cv::aruco::Board::create(&points, dictionary, &ids);
+  emptyBoard = cv::aruco::Board::create(points, dictionary, ids);
 }
 
 ArucoMarker::operator QString() const
