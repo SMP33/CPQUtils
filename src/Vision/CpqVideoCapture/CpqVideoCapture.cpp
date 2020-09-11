@@ -81,14 +81,23 @@ CpqVideoCapture::release()
   emit captureReleased();
 }
 
-bool
+void
 cpq::vis::CpqVideoCapture::set(int propId, double value)
 {
   if (worker) {
-    worker->set(propId,value);
-  } else {
-    return false;
+    emit setSignal(propId,value);
   }
+}
+
+int
+cpq::vis::CpqVideoCapture::getRealSourceFps()
+{
+  if (worker) {
+    return worker->getRealFps();
+  } else {
+    return 0;
+  }
+
 }
 
 bool
@@ -109,6 +118,11 @@ cpq::vis::CpqVideoCapture::connectWorker()
           &CpqVideoCaptureWorker_private::jpegCaptured,
           this,
           &CpqVideoCapture::onJpegCaptured);
+
+  connect(this,
+          &CpqVideoCapture::setSignal,
+          worker,
+          &CpqVideoCaptureWorker_private::set);
 }
 
 void

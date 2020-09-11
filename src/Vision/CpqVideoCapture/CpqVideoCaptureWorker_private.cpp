@@ -84,7 +84,13 @@ cpq::vis::CpqVideoCaptureWorker_private::clientRemove()
   }
 }
 
-bool
+int
+cpq::vis::CpqVideoCaptureWorker_private::getRealFps()
+{
+  return m_fps;
+}
+
+void
 cpq::vis::CpqVideoCaptureWorker_private::set(int propId, double value)
 {
   capture.set(propId, value);
@@ -93,7 +99,6 @@ cpq::vis::CpqVideoCaptureWorker_private::set(int propId, double value)
       timer.setInterval(1e3 / value);
     }
   }
-  return false;
 }
 
 CpqVideoCaptureWorker_private*
@@ -113,9 +118,9 @@ void
 cpq::vis::CpqVideoCaptureWorker_private::start()
 {
   if (m_isOpened) {
-    // timer.setTimerType(Qt::TimerType::PreciseTimer);
+    timer.setTimerType(Qt::TimerType::PreciseTimer);
     timer.start(33);
-
+    fpsTimer.start();
     connect(&timer,
             &QTimer::timeout,
             this,
@@ -131,12 +136,17 @@ CpqVideoCaptureWorker_private::onGrabbed()
   if (capture.read(mat)) {
 
     mat.copyTo(local_mat);
-
     CpqMat m(local_mat);
     // this->usleep(1e3);
 
     emit frameCaptured(m);
-    emit jpegCaptured(mat2Jpeg(m));
+    //emit jpegCaptured(mat2Jpeg(m));
+    if (fpsTimer.elapsed() > 1e3) {
+      fpsTimer.restart();
+      m_fps = fps_count;
+      fps_count = 0;
+    }
+    fps_count++;
   }
 }
 

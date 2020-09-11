@@ -28,7 +28,9 @@ public:
   /// @brief See cv::VideoCapture::release()
   void release();
   /// @brief See cv::VideoCapture::set()
-  bool set(int propId, double value);
+  void set(int propId, double value);
+
+  int getRealSourceFps();
 
 public slots:
   virtual void onFrameCaptured(cpq::vis::CpqMat mat);
@@ -37,8 +39,10 @@ public slots:
 signals:
   void frameCaptured(cpq::vis::CpqMat mat);
   void jpegCaptured(QByteArray jpeg);
+  void bmpCaptured(QByteArray bmp);
   void captureStarted();
   void captureReleased();
+  void setSignal(int propId, double value);
 
 protected:
   bool checkFrameSender();

@@ -18,15 +18,18 @@ cpq_start_namespace(vis)
 public:
   struct DetectorSettings
   {
-    DetectorSettings(cv::aruco::Board* board = nullptr,
-                     cv::Mat* camera_matrix = nullptr,
-                     cv::Mat* dist_coeffs = nullptr);
+    DetectorSettings(
+      cv::aruco::Board* board = nullptr,
+      cv::Mat* camera_matrix = nullptr,
+      cv::Mat* dist_coeffs = nullptr,
+      cv::aruco::DetectorParameters* params = nullptr);
 
     bool isOk();
 
     std::shared_ptr<cv::aruco::Board> board;
     std::shared_ptr<cv::Mat> camera_matrix;
     std::shared_ptr<cv::Mat> distorsion_array;
+    std::shared_ptr<cv::aruco::DetectorParameters> params;
   };
 
   ArucoDetector(QObject* parent = nullptr);
@@ -48,17 +51,17 @@ private:
 
   QMutex mutex;
   DetectorSettings settings;
-
   bool frameUpdated = false;
   CpqMat lastFrame;
   cv::Mat* frame;
 
   uint fps = 1000;
   uint fps_count = 0;
-  uint m_computePeriod = 1e3 / 50;
+  uint m_computePeriod = 1e3 / 20;
 
   QTimer computeTimer;
   QElapsedTimer fpsTimer;
+  QElapsedTimer outTimer;
 };
 
 cpq_end_namespace

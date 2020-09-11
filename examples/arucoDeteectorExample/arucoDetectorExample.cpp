@@ -51,9 +51,19 @@ main(int argc, char* argv[])
                               -0.0000344732,
                               -0.0001545724,
                               -0.0155932033);
+  cv::aruco::DetectorParameters params;
 
   ArucoDetector::DetectorSettings settings(
-    board, &camera_matrix, &distorsion_array);
+    board, &camera_matrix, &distorsion_array, &params);
+
+  ArucoDetector* source = new ArucoDetector;
+  QThread detectorThr;
+  source->setSettings(settings);
+  source->capture(0);
+  source->set(cv::CAP_PROP_FPS, 50);
+
+  source->moveToThread(&detectorThr);
+  detectorThr.start();
 
   // settings.board = board;
   // settings.camera_matrix = std::shared_ptr<cv::Mat>(new Mat(camera_matrix));
@@ -70,10 +80,7 @@ main(int argc, char* argv[])
   server.addRouteResponse("/map", HttpResponse(jpegMap, 200, "OK", mapHeaders));
 
   server.addRouteCallback(
-    "/", [settings](QTcpSocket* socket, cpq::web::HttpRequest request) {
-      ArucoDetector* source = new ArucoDetector;
-      source->setSettings(settings);
-
+    "/", [source](QTcpSocket* socket, cpq::web::HttpRequest request) {
       QThread* thr = new QThread;
 
       HttpReplaceClientHandler* handler =
@@ -81,26 +88,13 @@ main(int argc, char* argv[])
       auto* controller = new HandlerController(handler, socket);
 
       QObject::connect(thr, &QThread::started, [=]() {
-        bool ok = false;
+        QObject::connect(source,
+                         &CpqVideoCapture::jpegCaptured,
+                         handler,
+                         &HttpReplaceClientHandler::updateData);
+        QObject::connect(thr, &QThread::finished, thr, &QThread::deleteLater);
 
-        if (request.route == "/") {
-          ok = source->capture(0);
-        } else {
-          // request.route.right(request.route.length() - 1);
-          ok = source->capture("http://123localhost/asd");
-        }
-        if (ok) {
-          source->set(cv::CAP_PROP_FPS, 30);
-          QObject::connect(
-            controller, &QObject::destroyed, source, &QObject::deleteLater);
-          QObject::connect(source,
-                           &CpqVideoCapture::jpegCaptured,
-                           handler,
-                           &HttpReplaceClientHandler::updateData);
-          QObject::connect(thr, &QThread::finished, thr, &QThread::deleteLater);
-
-          handler->start();
-        }
+        handler->start();
       });
 
       thr->start();

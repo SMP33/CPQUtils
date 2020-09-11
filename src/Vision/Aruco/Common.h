@@ -6,6 +6,7 @@ namespace cv {
 class Mat;
 namespace aruco {
 class Dictionary;
+class DetectorParameters;
 class Board;
 }
 }

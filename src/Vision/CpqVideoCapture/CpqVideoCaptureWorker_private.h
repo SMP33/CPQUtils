@@ -21,13 +21,14 @@ public:
   bool isOpened() const;
   bool clientsCount() const;
   void clientRemove();
-  bool set(int propId, double value);
+  int getRealFps();
 
   explicit CpqVideoCaptureWorker_private(QString url);
   static CpqVideoCaptureWorker_private* getWorker(int index);
 
 public slots:
   void onGrabbed();
+  void set(int propId, double value);
 
 signals:
   void frameCaptured(cpq::vis::CpqMat mat);
@@ -42,16 +43,17 @@ private:
   };
 
   Type captureType;
-
   QTimer timer;
+  QElapsedTimer fpsTimer;
 
   explicit CpqVideoCaptureWorker_private(int index);
   void release();
+  void clientAdd();
   bool m_isOpened = false;
 
-  void clientAdd();
-
   unsigned int m_count = 0;
+  int m_fps = 0;
+  int fps_count=0;
 
   QString m_url;
   int m_index;
