@@ -108,17 +108,13 @@ ArucoDetector::computePosition()
       cv::aruco::detectMarkers(*frame,
                                settings.board->dictionary,
                                markerCorners,
-                               markerIds,
-                               settings.params,
-                               cv::noArray(),
-                               *settings.camera_matrix,
-                               *settings.distorsion_array);
+                               markerIds);
 
       if (markerIds.size() > 0) {
 
         int valid = cv::aruco::estimatePoseBoard(markerCorners,
                                                  markerIds,
-                                                 settings.board,
+                                                 (const cv::Ptr<cv::aruco::Board>&)settings.board,
                                                  *settings.camera_matrix,
                                                  *settings.distorsion_array,
                                                  rvec,
