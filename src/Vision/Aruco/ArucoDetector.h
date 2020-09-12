@@ -26,10 +26,10 @@ public:
 
     bool isOk();
 
-    std::shared_ptr<cv::aruco::Board> board;
-    std::shared_ptr<cv::Mat> camera_matrix;
-    std::shared_ptr<cv::Mat> distorsion_array;
-    std::shared_ptr<cv::aruco::DetectorParameters> params;
+    cv::Ptr<cv::aruco::Board> board;
+    cv::Ptr<cv::Mat> camera_matrix;
+    cv::Ptr<cv::Mat> distorsion_array;
+    cv::Ptr<cv::aruco::DetectorParameters> params;
   };
 
   ArucoDetector(QObject* parent = nullptr);
@@ -57,7 +57,7 @@ private:
 
   uint fps = 1000;
   uint fps_count = 0;
-  uint m_computePeriod = 1e3 / 20;
+  uint m_computePeriod = 1e3 / 30;
 
   QTimer computeTimer;
   QElapsedTimer fpsTimer;

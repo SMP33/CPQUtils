@@ -44,8 +44,8 @@ ArucoMarker::ArucoMarker(quint16 id, double size, double x, double y, double z)
 
 void
 arucoMapToBoard(ArucoMarkerMap& markersMap,
-                std::shared_ptr<cv::aruco::Board>& emptyBoard,
-                std::shared_ptr<cv::aruco::Dictionary> dictionary)
+                cv::Ptr<cv::aruco::Board>& emptyBoard,
+                cv::Ptr<cv::aruco::Dictionary> dictionary)
 {
   QMap<quint16, ArucoMarker> map;
 
@@ -160,7 +160,7 @@ void
 drawArucoMarkerMap(uint pixelsPerCm,
                    cv::Mat& outImage,
                    ArucoMarkerMap& map,
-                   std::shared_ptr<cv::aruco::Dictionary> dictionary)
+                   cv::Ptr<cv::aruco::Dictionary> dictionary)
 {
 
   uint basicBorder = 1;

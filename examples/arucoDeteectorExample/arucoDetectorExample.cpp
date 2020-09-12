@@ -28,7 +28,7 @@ main(int argc, char* argv[])
 
   ArucoMarkerMap map = loadArucoMap(":/aruco_map.txt");
   Mat mapMat;
-  std::shared_ptr<cv::aruco::Dictionary> dict =
+  cv::Ptr<cv::aruco::Dictionary> dict =
     cv::aruco::getPredefinedDictionary(cv::aruco::DICT_4X4_1000);
 
   cv::Ptr<cv::aruco::Board> board;
@@ -54,7 +54,7 @@ main(int argc, char* argv[])
   cv::aruco::DetectorParameters params;
 
   ArucoDetector::DetectorSettings settings(
-    board, &camera_matrix, &distorsion_array, &params);
+    board.get(), &camera_matrix, &distorsion_array, &params);
 
   ArucoDetector* source = new ArucoDetector;
   QThread detectorThr;
@@ -64,11 +64,6 @@ main(int argc, char* argv[])
 
   source->moveToThread(&detectorThr);
   detectorThr.start();
-
-  // settings.board = board;
-  // settings.camera_matrix = std::shared_ptr<cv::Mat>(new Mat(camera_matrix));
-  // settings.distorsion_array =
-  //  std::shared_ptr<cv::Mat>(new Mat(distorsion_array));
 
   HttpServer server;
   server.listen(QHostAddress::Any, 8080);
@@ -91,7 +86,8 @@ main(int argc, char* argv[])
         QObject::connect(source,
                          &CpqVideoCapture::jpegCaptured,
                          handler,
-                         &HttpReplaceClientHandler::updateData);
+                         &HttpReplaceClientHandler::updateData,
+                         Qt::ConnectionType::DirectConnection);
         QObject::connect(thr, &QThread::finished, thr, &QThread::deleteLater);
 
         handler->start();

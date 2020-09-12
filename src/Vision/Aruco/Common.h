@@ -1,14 +1,15 @@
 #pragma once
 
 #include "../../Core.h"
-#include <memory>
+#include <opencv2/opencv.hpp>
+#include <opencv2/aruco.hpp>
 
 namespace cv {
 class Mat;
 namespace aruco {
-class Dictionary;
-class DetectorParameters;
-class Board;
+//class Dictionary;
+//class DetectorParameters;
+//class Board;
 }
 }
 
@@ -69,11 +70,11 @@ loadArucoMap(QString file);
 
 void
 arucoMapToBoard(ArucoMarkerMap& markersMap,
-                std::shared_ptr<cv::aruco::Board>& emptyBoard,
-                std::shared_ptr<cv::aruco::Dictionary> dictionary);
+                cv::Ptr<cv::aruco::Board>& emptyBoard,
+                cv::Ptr<cv::aruco::Dictionary> dictionary);
 
 void
 drawArucoMarkerMap(uint pixelsPerCm,
                    cv::Mat& outImage,
                    ArucoMarkerMap& map,
-                   std::shared_ptr<cv::aruco::Dictionary> dictionary);
+                   cv::Ptr<cv::aruco::Dictionary> dictionary);
