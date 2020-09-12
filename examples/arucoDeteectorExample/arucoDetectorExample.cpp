@@ -60,9 +60,9 @@ main(int argc, char* argv[])
   QThread detectorThr;
   source->setSettings(settings);
   source->capture(0);
-  source->set(cv::CAP_PROP_FPS, 50);
+  source->set(cv::CAP_PROP_FPS, 30);
 
-  source->moveToThread(&detectorThr);
+  //source->moveToThread(&detectorThr);
   detectorThr.start();
 
   HttpServer server;
