@@ -46,8 +46,8 @@ HttpServer::addRouteResponse(QString route,
 {
   auto functor_ = [functor](QTcpSocket* socket, HttpRequest request) -> void {
     socket->write(functor(request).toQByteArray());
-    socket->flush();
-    socket->close();
+
+    waitAndClose(socket, 1e2);
   };
 
   this->addRouteCallback(route, functor_);
@@ -111,8 +111,7 @@ HttpServer::set404Responce(std::function<HttpResponse(HttpRequest)> functor)
   QMutexLocker locker(mutex);
   handler404 = [functor](QTcpSocket* socket, HttpRequest request) -> void {
     socket->write(functor(request).toQByteArray());
-    socket->flush();
-    socket->close();
+    waitAndClose(socket, 1e2);
   };
 }
 
@@ -262,4 +261,26 @@ HttpResponse::toQByteArray()
   response += body;
 
   return response;
+}
+
+void
+cpq::web::waitAndClose(QTcpSocket* socket, quint16 ms, bool enableAutodelete)
+{
+
+    if (enableAutodelete) {
+    cpq::web::enableAutodelete(socket);
+  }
+
+  QTimer::singleShot(ms, [=]() {
+
+    socket->close();
+  });
+}
+
+void
+cpq::web::enableAutodelete(QTcpSocket* socket)
+{
+  QObject::connect(socket, &QTcpSocket::disconnected, &QObject::deleteLater);
+  QObject::connect(
+    socket, &QObject::destroyed, []() { qDebug() << "Устрой дестрой!"; });
 }

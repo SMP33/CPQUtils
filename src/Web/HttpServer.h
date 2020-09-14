@@ -10,6 +10,7 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QThread>
+#include <QTimer>
 
 #define HttpServerCallback(SOCKET_VAR, REQUEST_VAR)                            \
   [](QTcpSocket * SOCKET_VAR, cpq::web::HttpRequest REQUEST_VAR)
@@ -17,6 +18,12 @@
 namespace cpq {
 
 namespace web {
+
+void
+enableAutodelete(QTcpSocket* socket);
+
+void
+waitAndClose(QTcpSocket* socket, quint16 ms, bool enableAutodelete = true);
 
 /// \brief Инкапсулирует HTTP запрос к серверу.
 struct HttpRequest
@@ -141,8 +148,8 @@ HttpServer::addRouteResponse(QString route, Functor functor)
 {
   auto functor_ = [functor](QTcpSocket* socket, HttpRequest request) -> void {
     socket->write(functor(request).toQByteArray());
-    socket->flush();
-    socket->close();
+    waitAndClose(socket, 1e2);
+    ;
   };
 
   this->addRouteCallback(route, functor_);
@@ -165,8 +172,8 @@ HttpServer::set404Responce(Functor functor)
   QMutexLocker locker(mutex);
   handler404 = [functor](QTcpSocket* socket, HttpRequest request) -> void {
     socket->write(functor(request).toQByteArray());
-    socket->flush();
-    socket->close();
+    waitAndClose(socket, 1e2);
+    ;
   };
 }
 } // namespace Web

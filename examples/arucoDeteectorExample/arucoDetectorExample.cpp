@@ -60,9 +60,11 @@ main(int argc, char* argv[])
   QThread detectorThr;
   source->setSettings(settings);
   source->capture(0);
-  source->set(cv::CAP_PROP_FPS, 30);
+  source->set(cv::CAP_PROP_FPS, 20);
+  source->set(cv::CAP_PROP_FRAME_WIDTH, 320);
+  source->set(cv::CAP_PROP_FRAME_HEIGHT, 240);
 
-  //source->moveToThread(&detectorThr);
+  source->moveToThread(&detectorThr);
   detectorThr.start();
 
   HttpServer server;
@@ -86,8 +88,7 @@ main(int argc, char* argv[])
         QObject::connect(source,
                          &CpqVideoCapture::jpegCaptured,
                          handler,
-                         &HttpReplaceClientHandler::updateData,
-                         Qt::ConnectionType::DirectConnection);
+                         &HttpReplaceClientHandler::updateData);
         QObject::connect(thr, &QThread::finished, thr, &QThread::deleteLater);
 
         handler->start();

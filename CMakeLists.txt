@@ -42,24 +42,24 @@ configure_file(cmake/uninstall.cmake uninstall.cmake @ONLY)
 
 configure_file(cmake/CPQUtilsConfig.cmake CPQUtilsConfig.cmake)
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/${CMAKE_PROJECT_NAME}
-)
-
-install(TARGETS
-        Web Vision Core
-        EXPORT Targets
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
-    LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
-    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
-    INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_PREFIX}/include
-)
-
-install(EXPORT Targets
-        FILE Targets.cmake
-        NAMESPACE CPQUtils::
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/CPQUtils
-         )
-
-export(PACKAGE CPQUtils)
+#install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake
+#  DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/${CMAKE_PROJECT_NAME}
+#)
+#
+#install(TARGETS
+#        Web Vision Core
+#        EXPORT Targets
+#    ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+#    LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+#    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
+#    INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include
+#    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_PREFIX}/include
+#)
+#
+#install(EXPORT Targets
+#        FILE Targets.cmake
+#        NAMESPACE CPQUtils::
+#        DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/CPQUtils
+#         )
+#
+#export(PACKAGE CPQUtils)

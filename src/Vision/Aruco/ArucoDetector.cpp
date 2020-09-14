@@ -135,6 +135,7 @@ ArucoDetector::computePosition()
       fps_count++;
     }
 
+    //Вывод изображения
     if (!frame->empty()) {
       outTimer.restart();
 
@@ -146,8 +147,8 @@ ArucoDetector::computePosition()
       cv::imencode(".jpeg", *frame, buff, param);
       QByteArray* arr =
         new QByteArray(reinterpret_cast<const char*>(buff.data()), buff.size());
-      emit jpegCaptured(*arr);
 
+      emit jpegCaptured(*arr);
       delete arr;
     }
     frameUpdated = false;

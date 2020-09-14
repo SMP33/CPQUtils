@@ -30,7 +30,8 @@ HandlerController::HandlerController(AbstractClientHandler* handler,
   connect(handler, &QObject::destroyed, this, &QObject::deleteLater);
 }
 
-cpq::web::HandlerController::~HandlerController() {
+cpq::web::HandlerController::~HandlerController()
+{
 
   handler = nullptr;
 }
@@ -51,7 +52,6 @@ HandlerController::readFromHandler(const QByteArray& bytes)
   if (socket != nullptr) {
     if (socket->isWritable()) {
       socket->write(bytes);
-      socket->flush();
     }
   }
 }
@@ -63,6 +63,5 @@ HandlerController::onSocketClosed()
 void
 HandlerController::closeSocket()
 {
-  socket->flush();
   socket->close();
 }
