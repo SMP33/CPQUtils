@@ -6,9 +6,9 @@
 #include <QSharedPointer>
 
 #include "../QCVTypes.h"
+#include "../../Core.h"
 
-namespace cpq {
-namespace vis {
+cpq_start_namespace(vis)
 
 class CpqVideoCaptureWorker_private;
 
@@ -51,7 +51,9 @@ private:
   CpqVideoCaptureWorker_private* worker = nullptr;
   void connectWorker();
 };
-}
-}
+
+
+
+cpq_end_namespace
 
 #endif // VIDEOSOURCE_H

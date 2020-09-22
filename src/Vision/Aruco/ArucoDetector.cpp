@@ -101,27 +101,27 @@ ArucoDetector::computePosition()
         *frame, settings.board->dictionary, markerCorners, markerIds);
       auto t2 = QDateTime::currentMSecsSinceEpoch();
 
-      // if (markerIds.size() > 0) {
+       if (markerIds.size() > 0) {
 
-      //  int valid = cv::aruco::estimatePoseBoard(markerCorners,
-      //                                           markerIds,
-      //                                           (const
-      //                                           cv::Ptr<cv::aruco::Board>&)settings.board,
-      //                                           *settings.camera_matrix,
-      //                                           *settings.distorsion_array,
-      //                                           rvec,
-      //                                           tvec);
+        int valid = cv::aruco::estimatePoseBoard(markerCorners,
+                                                 markerIds,
+                                                 (const
+                                                 cv::Ptr<cv::aruco::Board>&)settings.board,
+                                                 *settings.camera_matrix,
+                                                 *settings.distorsion_array,
+                                                 rvec,
+                                                 tvec);
 
-      //  cv::aruco::drawDetectedMarkers(*frame, markerCorners, markerIds);
-      //  if (valid > 0) {
-      //    cv::aruco::drawAxis(*frame,
-      //                        *settings.camera_matrix,
-      //                        *settings.distorsion_array,
-      //                        rvec,
-      //                        tvec,
-      //                        10);
-      //  }
-      //}
+        cv::aruco::drawDetectedMarkers(*frame, markerCorners, markerIds);
+        if (valid > 0) {
+          cv::aruco::drawAxis(*frame,
+                              *settings.camera_matrix,
+                              *settings.distorsion_array,
+                              rvec,
+                              tvec,
+                              10);
+        }
+      }
 
       // Calc fps
       if (fpsTimer.elapsed() > 1e3) {
